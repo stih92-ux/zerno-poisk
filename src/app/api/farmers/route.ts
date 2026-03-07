@@ -48,14 +48,42 @@ const PRODUCT_FIELDS: Record<string, keyof Farmer> = {
   soy: "soy",
 };
 
+// In-memory cache to avoid re-reading 5MB file on every request
+let _farmersCache: Farmer[] | null = null;
+
 async function loadFarmersData(): Promise<Farmer[]> {
+  if (_farmersCache) return _farmersCache;
+
   try {
-    // Try to load from /data/farmers.json (public/data directory)
     const publicDataPath = path.join(process.cwd(), "public", "data", "farmers.json");
 
     if (fs.existsSync(publicDataPath)) {
       const data = fs.readFileSync(publicDataPath, "utf-8");
-      return JSON.parse(data);
+      const parsed = JSON.parse(data) as any[];
+      // Normalize compact JSON (missing fields → defaults)
+      _farmersCache = parsed.map((r) => ({
+        name: r.name || "",
+        district: r.district || "",
+        region: r.region || "",
+        rayon: r.rayon || "",
+        address: r.address || "",
+        contact1: r.contact1 || "",
+        phone1: r.phone1 || "",
+        phone2: r.phone2 || "",
+        email: r.email || "",
+        holding: r.holding || "",
+        land_total: r.land_total || 0,
+        wheat_winter: r.wheat_winter || 0,
+        wheat_spring: r.wheat_spring || 0,
+        barley_winter: r.barley_winter || 0,
+        barley_spring: r.barley_spring || 0,
+        corn_grain: r.corn_grain || 0,
+        sunflower: r.sunflower || 0,
+        soy: r.soy || 0,
+        specialization: r.specialization || "",
+      }));
+      console.log(`Farmers: loaded ${_farmersCache.length} records`);
+      return _farmersCache;
     }
   } catch (error) {
     console.error("Error loading farmers data:", error);
@@ -91,10 +119,11 @@ function searchFarmers(
     });
   }
 
-  // Filter by federal districts
+  // Filter by federal districts (codes like PFO → full names like Приволжский)
   if (federalDistricts && federalDistricts.length > 0) {
+    const districtNames = federalDistricts.map((code) => DISTRICT_MAP[code] || code);
     filtered = filtered.filter((f) =>
-      federalDistricts.includes(f.district)
+      districtNames.some((name) => f.district.includes(name))
     );
   }
 
