@@ -26,13 +26,11 @@ const UN_COUNTRY_CODES: Record<string, string> = {
   AM: "051",
 };
 
-// Flow codes: import=M, export=X
-const FLOW_CODES: Record<string, string> = {
-  import: "M",
-  export: "X",
-};
+// Countries that stopped reporting (need mirror data)
+const MIRROR_REPORTERS = new Set(["643", "112"]); // Russia, Belarus
 
-const COMTRADE_API = "https://comtradeapi.un.org/data/v1/get/C/A/HS";
+// FREE preview API — no key needed, but 1 period + 1 commodity per request
+const COMTRADE_PREVIEW_API = "https://comtradeapi.un.org/public/v1/preview/C/A/HS";
 
 interface ComtradeRecord {
   refYear: number;
@@ -49,6 +47,58 @@ interface ComtradeRecord {
   _from?: string;
   _to?: string;
   _mirror?: boolean;
+  _source?: string;
+}
+
+async function queryComtradePreview(
+  period: string,
+  reporterCode: string,
+  cmdCode: string,
+  flowCodes: string,
+  partnerCode?: string,
+): Promise<ComtradeRecord[]> {
+  const url = new URL(COMTRADE_PREVIEW_API);
+  url.searchParams.set("reporterCode", reporterCode);
+  url.searchParams.set("period", period);
+  url.searchParams.set("cmdCode", cmdCode);
+  url.searchParams.set("flowCode", flowCodes);
+  url.searchParams.set("partnerCode", partnerCode || "");
+  url.searchParams.set("partner2Code", "");
+  url.searchParams.set("customsCode", "");
+  url.searchParams.set("motCode", "");
+  url.searchParams.set("maxRecords", "500");
+  url.searchParams.set("includeDesc", "true");
+
+  try {
+    const response = await fetch(url.toString(), {
+      headers: { "User-Agent": "zerno-poisk-web/1.0" },
+    });
+
+    if (!response.ok) {
+      console.warn(`Comtrade ${response.status} for ${period}/${cmdCode}`);
+      return [];
+    }
+
+    const data = await response.json();
+    const rows = data?.data || [];
+
+    return rows.filter((r: any) => r.primaryValue > 0).map((r: any) => ({
+      refYear: r.refYear,
+      reporterCode: String(r.reporterCode || ""),
+      reporterDesc: r.reporterDesc || "",
+      partnerCode: String(r.partnerCode || ""),
+      partnerDesc: r.partnerDesc || "Мир",
+      cmdCode: r.cmdCode || "",
+      cmdDesc: r.cmdDesc || "",
+      flowCode: r.flowCode || "",
+      flowDesc: r.flowDesc || "",
+      primaryValue: r.primaryValue || 0,
+      netWgt: r.netWgt || undefined,
+    }));
+  } catch (e: any) {
+    console.warn(`Comtrade error for ${period}/${cmdCode}: ${e.message}`);
+    return [];
+  }
 }
 
 export async function GET(request: NextRequest) {
@@ -65,9 +115,7 @@ export async function GET(request: NextRequest) {
   }
 
   const products = productsStr.split(",").filter((p) => p.trim() && p.trim() in HS_CODES);
-  const countries = countriesStr
-    .split(",")
-    .filter((c) => c.trim() && c.trim() in UN_COUNTRY_CODES);
+  const countries = countriesStr.split(",").filter((c) => c.trim() && c.trim() in UN_COUNTRY_CODES);
 
   if (products.length === 0 || countries.length === 0) {
     return NextResponse.json(
@@ -77,135 +125,79 @@ export async function GET(request: NextRequest) {
   }
 
   // Determine flows
-  let flows: string[] = [];
-  if (flowStr === "import") flows = ["M"];
-  else if (flowStr === "export") flows = ["X"];
-  else flows = ["M", "X"];
+  let flowCodes = "M,X";
+  if (flowStr === "import") flowCodes = "M";
+  else if (flowStr === "export") flowCodes = "X";
 
-  // Get last 4 years
+  // Recent 4 years
   const currentYear = new Date().getFullYear();
-  const periods = [currentYear - 1, currentYear - 2, currentYear - 3, currentYear - 4].filter(
-    (y) => y >= 2012
-  );
+  const periods = [currentYear - 1, currentYear - 2, currentYear - 3, currentYear - 4]
+    .filter((y) => y >= 2012)
+    .map(String);
+
+  // Build HS codes and reporter codes
+  const hsCodes = products.map((p) => HS_CODES[p]).filter(Boolean);
+  const reporterCodes = countries.map((c) => UN_COUNTRY_CODES[c]).filter(Boolean);
+  const reporterStr = reporterCodes.join(",");
+
+  // Check if mirror needed
+  const needsMirror = reporterCodes.some((c) => MIRROR_REPORTERS.has(c));
+  const mirrorCountries = reporterCodes.filter((c) => MIRROR_REPORTERS.has(c)).join(",");
 
   const records: ComtradeRecord[] = [];
 
-  // Fetch data for each product, country, and flow combination
-  for (const product of products) {
-    for (const country of countries) {
-      for (const flow of flows) {
-        for (const period of periods) {
-          try {
-            const reporterCode = UN_COUNTRY_CODES[country];
-            const cmdCode = HS_CODES[product];
-            const flowCode = FLOW_CODES[flow];
+  // Free preview: 1 period + 1 commodity per request
+  // Stop at first year that returns data (most recent with data)
+  for (const period of periods) {
+    let gotData = false;
 
-            // Regular query
-            const url = new URL(COMTRADE_API);
-            url.searchParams.set("reporterCode", reporterCode);
-            url.searchParams.set("period", period.toString());
-            url.searchParams.set("cmdCode", cmdCode);
-            url.searchParams.set("flowCode", flowCode);
-            url.searchParams.set("partnerCode", "");
-            url.searchParams.set("partner2Code", "");
-            url.searchParams.set("customsCode", "");
-            url.searchParams.set("motCode", "");
-            url.searchParams.set("maxRecords", "500");
-            url.searchParams.set("includeDesc", "true");
+    for (const hs of hsCodes) {
+      // Direct query
+      const direct = await queryComtradePreview(period, reporterStr, hs, flowCodes);
+      for (const rec of direct) {
+        rec._source = "direct";
+        rec._mirror = false;
+        rec._from = rec.reporterDesc;
+        rec._to = rec.partnerDesc;
+        records.push(rec);
+        gotData = true;
+      }
 
-            const response = await fetch(url.toString(), {
-              headers: { "User-Agent": "zerno-poisk-web" },
-            });
+      // Mirror query for RU/BY (others report trade with them)
+      if (needsMirror) {
+        // Reverse flow: export→import, import→export
+        const mirrorFlows = flowCodes
+          .replace("X", "m_temp")
+          .replace("M", "X")
+          .replace("m_temp", "M");
 
-            if (response.ok) {
-              const data = (await response.json()) as any;
-              const data_records = data?.data || [];
-
-              // Process records
-              for (const rec of data_records) {
-                if (rec.primaryValue > 0) {
-                  records.push({
-                    refYear: rec.refYear,
-                    reporterCode: rec.reporterCode,
-                    reporterDesc: rec.reporterDesc || "",
-                    partnerCode: rec.partnerCode,
-                    partnerDesc: rec.partnerDesc || "Мир",
-                    cmdCode: rec.cmdCode,
-                    cmdDesc: rec.cmdDesc || "",
-                    flowCode: rec.flowCode,
-                    flowDesc: rec.flowDesc || "",
-                    primaryValue: rec.primaryValue,
-                    netWgt: rec.netWgt,
-                    _from: rec.reporterDesc || "",
-                    _to: rec.partnerDesc || "",
-                    _mirror: false,
-                  });
-                }
-              }
-            }
-
-            // Mirror query for RU and BY: reverse flow, use as partnerCode
-            if ((country === "RU" || country === "BY") && flow !== undefined) {
-              const reverseFlow = flow === "X" ? "M" : "X";
-              const mirrorUrl = new URL(COMTRADE_API);
-              mirrorUrl.searchParams.set("reporterCode", "");
-              mirrorUrl.searchParams.set("period", period.toString());
-              mirrorUrl.searchParams.set("cmdCode", cmdCode);
-              mirrorUrl.searchParams.set("flowCode", reverseFlow);
-              mirrorUrl.searchParams.set("partnerCode", reporterCode);
-              mirrorUrl.searchParams.set("partner2Code", "");
-              mirrorUrl.searchParams.set("customsCode", "");
-              mirrorUrl.searchParams.set("motCode", "");
-              mirrorUrl.searchParams.set("maxRecords", "500");
-              mirrorUrl.searchParams.set("includeDesc", "true");
-
-              const mirrorResponse = await fetch(mirrorUrl.toString(), {
-                headers: { "User-Agent": "zerno-poisk-web" },
-              });
-
-              if (mirrorResponse.ok) {
-                const mirrorData = (await mirrorResponse.json()) as any;
-                const mirrorRecords = mirrorData?.data || [];
-
-                for (const rec of mirrorRecords) {
-                  if (rec.primaryValue > 0) {
-                    records.push({
-                      refYear: rec.refYear,
-                      reporterCode: rec.reporterCode,
-                      reporterDesc: rec.reporterDesc || "",
-                      partnerCode: rec.partnerCode,
-                      partnerDesc: rec.partnerDesc || "",
-                      cmdCode: rec.cmdCode,
-                      cmdDesc: rec.cmdDesc || "",
-                      flowCode: rec.flowCode,
-                      flowDesc: rec.flowDesc || "",
-                      primaryValue: rec.primaryValue,
-                      netWgt: rec.netWgt,
-                      _from: rec.reporterDesc || "",
-                      _to: rec.partnerDesc || "",
-                      _mirror: true,
-                    });
-                  }
-                }
-              }
-            }
-          } catch {
-            // Silently skip errors for this request
-          }
-
-          // Add delay to avoid rate limiting
-          await new Promise((resolve) => setTimeout(resolve, 100));
+        const mirror = await queryComtradePreview(period, "", hs, mirrorFlows, mirrorCountries);
+        for (const rec of mirror) {
+          rec._source = "mirror";
+          rec._mirror = true;
+          // In mirror: reporter=Turkey, partner=Russia, flow=Import
+          // means Russia exported to Turkey
+          rec._from = rec.partnerDesc;
+          rec._to = rec.reporterDesc;
+          records.push(rec);
+          gotData = true;
         }
       }
+
+      // Small delay to avoid rate limiting
+      await new Promise((resolve) => setTimeout(resolve, 200));
     }
+
+    // Stop after first year with data (like the bot does)
+    if (gotData) break;
   }
 
-  // Sort by primaryValue descending and limit to 50 records
+  // Sort by value descending, limit to 50
   const sorted = records.sort((a, b) => b.primaryValue - a.primaryValue).slice(0, 50);
 
   return NextResponse.json({
     records: sorted,
     total: sorted.length,
-    source: "UN Comtrade",
+    source: "UN Comtrade (free preview)",
   });
 }
