@@ -116,18 +116,20 @@ export default function AdminPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-slate-50">
-        <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <header className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: '#1a2e1a' }}>
           <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
               <span className="text-2xl">🌾</span>
-              <span className="text-xl font-bold text-slate-900">ЗерноПоиск</span>
+              <span className="text-xl font-bold text-white">ЗерноПоиск</span>
             </Link>
             <nav className="flex items-center gap-4">
-              <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600">Декларации</Link>
-              <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
-              <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
-              <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600">GACC</Link>
-              <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600">Фермеры</Link>
+              <Link href="/search" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Декларации</Link>
+              <Link href="/prices" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Цены</Link>
+              <Link href="/comtrade" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Comtrade</Link>
+              <Link href="/gacc" className="text-sm font-medium text-white/70 hover:text-white transition-colors">GACC</Link>
+              <Link href="/farmers" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Фермеры</Link>
+              <Link href="/blog" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Блог</Link>
+              <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Бот</a>
               <ThemeToggle />
             </nav>
           </div>
@@ -173,21 +175,23 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: '#1a2e1a' }}>
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <span className="text-2xl">🌾</span>
-            <span className="text-xl font-bold text-slate-900">ЗерноПоиск</span>
+            <span className="text-xl font-bold text-white">ЗерноПоиск</span>
           </Link>
           <nav className="flex items-center gap-4">
-            <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600">Декларации</Link>
-            <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
-            <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
-            <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600">GACC</Link>
-            <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600">Фермеры</Link>
+            <Link href="/search" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Декларации</Link>
+            <Link href="/prices" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Цены</Link>
+            <Link href="/comtrade" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Comtrade</Link>
+            <Link href="/gacc" className="text-sm font-medium text-white/70 hover:text-white transition-colors">GACC</Link>
+            <Link href="/farmers" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Фермеры</Link>
+            <Link href="/blog" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Блог</Link>
+            <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Бот</a>
             <button
               onClick={handleLogout}
-              className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors"
+              className="text-sm font-medium text-white/70 hover:text-red-300 transition-colors"
             >
               Выход
             </button>

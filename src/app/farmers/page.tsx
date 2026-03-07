@@ -114,17 +114,20 @@ export default function FarmersPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="sticky top-0 z-50 backdrop-blur-sm" style={{ backgroundColor: '#1a2e1a' }}>
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <span className="text-2xl">🌾</span>
-            <span className="text-xl font-bold text-slate-900">ЗерноПоиск</span>
+            <span className="text-xl font-bold text-white">ЗерноПоиск</span>
           </Link>
           <nav className="flex items-center gap-4">
-            <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600">Декларации</Link>
-            <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
-            <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
-            <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600">GACC</Link>
+            <Link href="/search" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Декларации</Link>
+            <Link href="/prices" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Цены</Link>
+            <Link href="/comtrade" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Comtrade</Link>
+            <Link href="/gacc" className="text-sm font-medium text-white/70 hover:text-white transition-colors">GACC</Link>
+            <Link href="/farmers" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Фермеры</Link>
+            <Link href="/blog" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Блог</Link>
+            <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Бот</a>
             <ThemeToggle />
           </nav>
         </div>
@@ -289,6 +292,51 @@ export default function FarmersPage() {
           </main>
         </div>
       </div>
+
+      {/* SEO Text */}
+      <section className="py-16 mt-8" style={{ backgroundColor: '#f0f2ed' }}>
+        <div className="mx-auto max-w-4xl px-4">
+          <h2 className="text-2xl font-bold mb-6" style={{ color: '#1c1c1c' }}>База фермеров России: 27 000+ КФХ с контактами и объёмами производства</h2>
+          <div className="space-y-4 text-base leading-relaxed" style={{ color: '#444' }}>
+            <p>База фермеров — это подробная информация о более чем 27 000 крестьянско-фермерских хозяйств (КФХ) и сельскохозяйственных предприятий России. Для каждого хозяйства указаны: название, федеральный округ и регион, контактное лицо с телефоном и email, специализация и посевные площади по культурам (пшеница озимая и яровая, ячмень, кукуруза, подсолнечник, соя).</p>
+            <p>Поиск работает по названию хозяйства, названию контактного лица, названию региона или специализации. Вы можете фильтровать по культурам и минимальной площади посева. Например, найдите всех производителей пшеницы в Воронежской области с площадью более 100 гектаров.</p>
+            <p>База полезна для трейдеров, переработчиков и логистов, которые ищут надёжных поставщиков и хотят связаться с ними напрямую. Сравните предложения от разных хозяйств и проверьте их декларации соответствия на странице <a href="/search" style={{ color: '#2e7d32', textDecoration: 'underline' }}>Декларации</a> перед покупкой.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#1a2e1a' }} className="py-12 mt-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="flex flex-wrap gap-8 justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">🌾</span>
+                <span className="text-lg font-bold text-white">ЗерноПоиск</span>
+              </div>
+              <p className="text-white/60 text-sm">Поиск зерновых деклараций<br/>и аналитика рынка</p>
+            </div>
+            <div className="flex gap-8">
+              <div className="flex flex-col gap-2">
+                <Link href="/search" className="text-sm text-white/70 hover:text-white">Декларации</Link>
+                <Link href="/prices" className="text-sm text-white/70 hover:text-white">Цены</Link>
+                <Link href="/comtrade" className="text-sm text-white/70 hover:text-white">Comtrade</Link>
+              </div>
+              <div className="flex flex-col gap-2">
+                <Link href="/gacc" className="text-sm text-white/70 hover:text-white">GACC</Link>
+                <Link href="/farmers" className="text-sm text-white/70 hover:text-white">Фермеры</Link>
+                <Link href="/blog" className="text-sm text-white/70 hover:text-white">Блог</Link>
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-white/70">Telegram: <a href="https://t.me/agro_analizbot" className="text-white hover:underline">@agro_analizbot</a></p>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-white/10 text-center text-sm text-white/50">
+            © 2026 ЗерноПоиск
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

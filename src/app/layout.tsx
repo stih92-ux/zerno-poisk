@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ЗерноПоиск — Поиск зерновых деклараций ФГИС",
+  title: "ЗерноПоиск — декларации, цены на зерно, база фермеров РФ",
   description:
-    "Поиск по базе зерновых деклараций ФГИС Росаккредитации. Более 500 000 деклараций. Контакты компаний, экспорт CSV.",
+    "500 000+ зерновых деклараций, котировки MOEX/ZOL/IDK, 27 000 КФХ с контактами. Найдите поставщика или покупателя зерна за 2 минуты. Вход бесплатный.",
 };
 
 // Inline script to apply theme before first paint (prevents flash)
