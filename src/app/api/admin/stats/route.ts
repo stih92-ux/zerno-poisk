@@ -1,68 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import * as fs from "fs";
-import * as path from "path";
+import { getStats } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
-
-// In-memory counters for web stats
-interface WebStats {
-  searchCount: number;
-  priceViews: number;
-  comtradeQueries: number;
-  gaccQueries: number;
-  farmerQueries: number;
-}
-
-interface BotStats {
-  available: boolean;
-  users: number;
-  searches: number;
-  trackingActive: number;
-  recentPayments: number;
-}
-
-interface StatsResponse {
-  web: {
-    searches: number;
-    priceViews: number;
-    comtradeQueries: number;
-    gaccQueries: number;
-    farmerQueries: number;
-    uptime: string;
-  };
-  bot: BotStats;
-}
-
-let webStats: WebStats = {
-  searchCount: 0,
-  priceViews: 0,
-  comtradeQueries: 0,
-  gaccQueries: 0,
-  farmerQueries: 0,
-};
-
-const startTime = Date.now();
-
-// Track web events
-export function trackEvent(event: string): void {
-  switch (event) {
-    case "search":
-      webStats.searchCount++;
-      break;
-    case "prices":
-      webStats.priceViews++;
-      break;
-    case "comtrade":
-      webStats.comtradeQueries++;
-      break;
-    case "gacc":
-      webStats.gaccQueries++;
-      break;
-    case "farmers":
-      webStats.farmerQueries++;
-      break;
-  }
-}
 
 function formatUptime(ms: number): string {
   const totalSeconds = Math.floor(ms / 1000);
@@ -71,46 +10,7 @@ function formatUptime(ms: number): string {
   return `${hours}h ${minutes}m`;
 }
 
-function getBotStats(): BotStats {
-  const dbPath = "/sessions/confident-busy-edison/mnt/mybot/.openclaw/workspace/zernopoisk/zernopoisk.db";
-
-  // Check if database exists and is accessible
-  try {
-    const stats = fs.statSync(dbPath);
-    if (!stats.isFile()) {
-      return {
-        available: false,
-        users: 0,
-        searches: 0,
-        trackingActive: 0,
-        recentPayments: 0,
-      };
-    }
-
-    // Database exists but we can't easily query it without a sqlite3 library
-    // For now, return available: true but with zero counts
-    // In production, you'd use a sqlite3 library to query the database
-    return {
-      available: true,
-      users: 0,
-      searches: 0,
-      trackingActive: 0,
-      recentPayments: 0,
-    };
-  } catch {
-    // Database file doesn't exist or can't be accessed
-    return {
-      available: false,
-      users: 0,
-      searches: 0,
-      trackingActive: 0,
-      recentPayments: 0,
-    };
-  }
-}
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  // Check admin password
   const password = request.nextUrl.searchParams.get("password");
   const adminPassword = process.env.ADMIN_PASSWORD;
 
@@ -121,19 +21,24 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const uptime = formatUptime(Date.now() - startTime);
-  const botStats = getBotStats();
+  const { counters, uptimeMs } = getStats();
 
-  const response: StatsResponse = {
+  const response = {
     web: {
-      searches: webStats.searchCount,
-      priceViews: webStats.priceViews,
-      comtradeQueries: webStats.comtradeQueries,
-      gaccQueries: webStats.gaccQueries,
-      farmerQueries: webStats.farmerQueries,
-      uptime,
+      searches: counters["fsa_search"] || 0,
+      priceViews: counters["price_view"] || 0,
+      comtradeQueries: counters["comtrade_query"] || 0,
+      gaccQueries: counters["gacc_query"] || 0,
+      farmerQueries: counters["farmer_query"] || 0,
+      uptime: formatUptime(uptimeMs),
     },
-    bot: botStats,
+    bot: {
+      available: false,
+      users: 0,
+      searches: 0,
+      trackingActive: 0,
+      recentPayments: 0,
+    },
   };
 
   return NextResponse.json(response);
