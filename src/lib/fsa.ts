@@ -10,6 +10,7 @@
  */
 
 import { createHash } from "crypto";
+import { ProxyAgent } from "undici";
 
 const BASE_URL = "https://pub.fsa.gov.ru";
 const DECLARATIONS_URL = `${BASE_URL}/api/v1/rds/common/declarations/get`;
@@ -293,22 +294,19 @@ async function fsaFetch(
   };
 
   try {
-    // На Vercel Edge/Node: если есть прокси, используем global-agent или https-proxy-agent
-    // Для serverless без прокси — прямой fetch
-    // Прокси поддержка через env HTTPS_PROXY (Node.js 18+ поддерживает через undici)
-    if (proxy && !process.env.HTTPS_PROXY) {
-      // Устанавливаем для текущего запроса
-      process.env.HTTPS_PROXY = proxy;
-      process.env.HTTP_PROXY = proxy;
-    }
-
-    const resp = await fetch(url, {
+    const fetchOptions: any = {
       ...options,
       headers,
       signal: controller.signal,
-      // @ts-ignore — Next.js расширение
-      next: { revalidate: 0 },
-    });
+    };
+
+    // Используем undici ProxyAgent для маршрутизации через прокси
+    if (proxy) {
+      fetchOptions.dispatcher = new ProxyAgent(proxy);
+      console.log(`FSA fetch via proxy: ${proxy.replace(/\/\/.*@/, "//***@")}`);
+    }
+
+    const resp = await fetch(url, fetchOptions);
     return resp;
   } finally {
     clearTimeout(timer);
