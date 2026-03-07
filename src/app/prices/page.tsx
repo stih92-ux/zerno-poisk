@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface PriceData {
   moex: any[];
@@ -39,6 +40,7 @@ export default function PricesPage() {
           </Link>
           <nav className="flex items-center gap-4">
             <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600">Поиск</Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

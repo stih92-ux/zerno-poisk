@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import { PRODUCTS, PRODUCT_ICONS, COUNTRIES } from "@/lib/data-refs";
 
 interface ComtradeRecord {
@@ -102,6 +103,7 @@ export default function ComtradePage() {
             <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
             <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600">GACC</Link>
             <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600">Фермеры</Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

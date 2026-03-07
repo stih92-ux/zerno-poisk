@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import { FEDERAL_DISTRICTS, PRODUCT_ICONS } from "@/lib/data-refs";
 
 interface Farmer {
@@ -124,6 +125,7 @@ export default function FarmersPage() {
             <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
             <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
             <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600">GACC</Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

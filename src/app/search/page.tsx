@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   PRODUCTS,
   SEGMENTS,
@@ -152,6 +153,7 @@ export default function SearchPage() {
           <nav className="flex items-center gap-4">
             <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
             <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-slate-600 hover:text-primary-600">Бот</a>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

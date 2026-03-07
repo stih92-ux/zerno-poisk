@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function HomePage() {
   return (
@@ -19,6 +20,7 @@ export default function HomePage() {
             <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">GACC</Link>
             <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Фермеры</Link>
             <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Бот</a>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

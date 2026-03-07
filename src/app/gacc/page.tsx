@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 // ==================== Types ====================
 
@@ -148,6 +149,7 @@ export default function GACCPage() {
             <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
             <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
             <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600">Фермеры</Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

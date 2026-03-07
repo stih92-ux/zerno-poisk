@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface BotUsers {
   total: number;
@@ -127,6 +128,7 @@ export default function AdminPage() {
               <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
               <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600">GACC</Link>
               <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600">Фермеры</Link>
+              <ThemeToggle />
             </nav>
           </div>
         </header>
@@ -189,6 +191,7 @@ export default function AdminPage() {
             >
               Выход
             </button>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
