@@ -24,18 +24,23 @@ interface GACCCompany {
 
 function isValidAccreditation(validTo: string): boolean {
   if (!validTo) return false;
-  // Parse YYYY-MM-DD format
-  const [year, month, day] = validTo.split("-").map(Number);
-  if (!year || !month || !day) return false;
-  const expDate = new Date(year, month - 1, day);
-  return expDate > new Date();
+  try {
+    // Format: "2024-06-29 00:00:00" or "2024-06-29"
+    const d = new Date(validTo.replace(" ", "T"));
+    return !isNaN(d.getTime()) && d > new Date();
+  } catch {
+    return false;
+  }
 }
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return "";
   try {
-    const [year, month, day] = dateStr.split("-");
-    return `${day}.${month}.${year}`;
+    // Format: "2024-06-29 00:00:00" → "29.06.2024"
+    const datePart = dateStr.split(" ")[0]; // strip time
+    const [year, month, day] = datePart.split("-");
+    if (year && month && day) return `${day}.${month}.${year}`;
+    return dateStr;
   } catch {
     return dateStr;
   }
