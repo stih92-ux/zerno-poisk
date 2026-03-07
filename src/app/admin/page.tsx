@@ -46,6 +46,7 @@ interface WebStats {
 interface StatsData {
   web: WebStats;
   bot: BotStats;
+  botUpdatedAt: string | null;
 }
 
 export default function AdminPage() {
@@ -246,6 +247,12 @@ export default function AdminPage() {
             {/* Bot Stats */}
             {bot?.available ? (
               <div className="space-y-6">
+                {stats.botUpdatedAt && (
+                  <div className="flex items-center gap-2 text-sm text-slate-500">
+                    <span className="inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                    Бот подключён. Обновлено: {new Date(stats.botUpdatedAt).toLocaleString("ru-RU")}
+                  </div>
+                )}
                 {/* Пользователи бота */}
                 <div className="card">
                   <h2 className="text-xl font-semibold text-slate-900 mb-6">🤖 Бот — Пользователи</h2>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStats } from "@/lib/stats";
+import { getStats, getBotStats } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 
@@ -10,39 +10,16 @@ function formatUptime(ms: number): string {
   return `${hours}h ${minutes}m`;
 }
 
-async function fetchBotStats(): Promise<Record<string, unknown> | null> {
-  const botStatsUrl = process.env.BOT_STATS_URL;
-  const botStatsToken = process.env.BOT_STATS_TOKEN;
-
-  if (!botStatsUrl || !botStatsToken) {
-    return null;
-  }
-
-  try {
-    const resp = await fetch(
-      `${botStatsUrl}/stats?token=${encodeURIComponent(botStatsToken)}`,
-      { signal: AbortSignal.timeout(5000) }
-    );
-    if (!resp.ok) return null;
-    return await resp.json();
-  } catch {
-    return null;
-  }
-}
-
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const password = request.nextUrl.searchParams.get("password");
   const adminPassword = process.env.ADMIN_PASSWORD;
 
   if (!adminPassword || password !== adminPassword) {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { counters, uptimeMs } = getStats();
-  const botStats = await fetchBotStats();
+  const { stats: botStats, updatedAt } = getBotStats();
 
   const response = {
     web: {
@@ -53,9 +30,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       farmerQueries: counters["farmer_query"] || 0,
       uptime: formatUptime(uptimeMs),
     },
-    bot: botStats || {
-      available: false,
-    },
+    bot: botStats || { available: false },
+    botUpdatedAt: updatedAt ? new Date(updatedAt).toISOString() : null,
   };
 
   return NextResponse.json(response);
