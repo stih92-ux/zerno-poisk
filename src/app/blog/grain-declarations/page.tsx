@@ -215,7 +215,6 @@ export default function GrainDeclarationsArticle() {
             <ul className="pl-6 list-disc space-y-2 mb-6">
               <li className="text-base leading-relaxed"><strong>Для граждан (фермеров):</strong> 20 000 - 100 000 рублей</li>
               <li className="text-base leading-relaxed"><strong>Для должностных лиц:</strong> 50 000 - 150 000 рублей</li>
-              <li className="text-base leading-relaxseveral">
               <li className="text-base leading-relaxed"><strong>Для юридических лиц (компаний):</strong> 100 000 - 300 000 рублей</li>
             </ul>
             <p className="text-base leading-relaxed mb-6">
