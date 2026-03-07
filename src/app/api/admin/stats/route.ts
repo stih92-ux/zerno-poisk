@@ -10,6 +10,26 @@ function formatUptime(ms: number): string {
   return `${hours}h ${minutes}m`;
 }
 
+async function fetchBotStats(): Promise<Record<string, unknown> | null> {
+  const botStatsUrl = process.env.BOT_STATS_URL;
+  const botStatsToken = process.env.BOT_STATS_TOKEN;
+
+  if (!botStatsUrl || !botStatsToken) {
+    return null;
+  }
+
+  try {
+    const resp = await fetch(
+      `${botStatsUrl}/stats?token=${encodeURIComponent(botStatsToken)}`,
+      { signal: AbortSignal.timeout(5000) }
+    );
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
+}
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const password = request.nextUrl.searchParams.get("password");
   const adminPassword = process.env.ADMIN_PASSWORD;
@@ -22,6 +42,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   const { counters, uptimeMs } = getStats();
+  const botStats = await fetchBotStats();
 
   const response = {
     web: {
@@ -32,12 +53,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       farmerQueries: counters["farmer_query"] || 0,
       uptime: formatUptime(uptimeMs),
     },
-    bot: {
+    bot: botStats || {
       available: false,
-      users: 0,
-      searches: 0,
-      trackingActive: 0,
-      recentPayments: 0,
     },
   };
 
