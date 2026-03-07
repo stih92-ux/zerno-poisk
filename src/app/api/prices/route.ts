@@ -68,7 +68,10 @@ async function fetchZol() {
       const text = await resp.text();
 
       // Парсим JS-массив вида [['DD.MM', price], ...]
-      const matches = [...text.matchAll(/\['(\d{2}\.\d{2})',\s*([\d.]+)\]/g)];
+      const regex = /\['(\d{2}\.\d{2})',\s*([\d.]+)\]/g;
+      const matches: RegExpExecArray[] = [];
+      let m: RegExpExecArray | null;
+      while ((m = regex.exec(text)) !== null) matches.push(m);
       if (matches.length >= 2) {
         const last = parseFloat(matches[matches.length - 1][2]);
         const prev = parseFloat(matches[matches.length - 2][2]);
