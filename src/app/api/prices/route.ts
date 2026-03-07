@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { trackEvent } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -14,6 +15,7 @@ const ZOL_MARKETS = [
 ];
 
 export async function GET() {
+  trackEvent("price_view");
   const [moex, zol, idk] = await Promise.allSettled([
     fetchMoex(),
     fetchZol(),

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { trackEvent } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -136,6 +137,7 @@ async function fetchFromChina(
 // ==================== Main Handler ====================
 
 export async function GET(request: NextRequest) {
+  trackEvent("gacc_query");
   try {
     const { searchParams } = new URL(request.url);
     const query = searchParams.get("query");
@@ -213,6 +215,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  trackEvent("gacc_query");
   try {
     const body = await request.json();
     const {

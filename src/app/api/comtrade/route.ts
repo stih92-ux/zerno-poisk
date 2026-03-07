@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { trackEvent } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -102,6 +103,7 @@ async function queryComtradePreview(
 }
 
 export async function GET(request: NextRequest) {
+  trackEvent("comtrade_query");
   const searchParams = request.nextUrl.searchParams;
   const productsStr = searchParams.get("products") || "";
   const countriesStr = searchParams.get("countries") || "";

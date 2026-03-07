@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchDeclarations } from "@/lib/fsa";
+import { trackEvent } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
+  trackEvent("fsa_search");
   try {
     const body = await request.json();
     const {

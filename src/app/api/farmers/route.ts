@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
+import { trackEvent } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 
@@ -166,6 +167,7 @@ function searchFarmers(
 }
 
 export async function GET(request: NextRequest) {
+  trackEvent("farmer_query");
   const searchParams = request.nextUrl.searchParams;
 
   // Parse query parameters
