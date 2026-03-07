@@ -1,0 +1,491 @@
+"use client";
+
+import { useState, useCallback } from "react";
+import Link from "next/link";
+
+// ==================== Types ====================
+
+interface GACCCompany {
+  corpNameMo: string;
+  corpNameEn: string;
+  corpAddrNameMo: string;
+  chinaRegNo: string;
+  overseasOfficialRegNo: string;
+  prodNameCn: string;
+  prodNameEn: string;
+  validFrom: string;
+  validTo: string;
+  corpTypeNameEn: string;
+  corpContactTel: string;
+  corpContactEmail: string;
+}
+
+// ==================== Helpers ====================
+
+function isValidAccreditation(validTo: string): boolean {
+  if (!validTo) return false;
+  // Parse YYYY-MM-DD format
+  const [year, month, day] = validTo.split("-").map(Number);
+  if (!year || !month || !day) return false;
+  const expDate = new Date(year, month - 1, day);
+  return expDate > new Date();
+}
+
+function formatDate(dateStr: string): string {
+  if (!dateStr) return "";
+  try {
+    const [year, month, day] = dateStr.split("-");
+    return `${day}.${month}.${year}`;
+  } catch {
+    return dateStr;
+  }
+}
+
+// ==================== Main Component ====================
+
+export default function GACCPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [companies, setCompanies] = useState<GACCCompany[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [searched, setSearched] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalResults, setTotalResults] = useState(0);
+
+  const itemsPerPage = 5;
+
+  // Поиск по названию компании
+  const doSearch = useCallback(async (query: string, page: number = 0) => {
+    if (!query.trim()) {
+      setError("Введите название компании");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setSearched(true);
+
+    try {
+      const resp = await fetch(`/api/gacc?query=${encodeURIComponent(query)}`);
+
+      if (!resp.ok) {
+        throw new Error(`API returned ${resp.status}`);
+      }
+
+      const data = await resp.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to fetch data");
+      }
+
+      setCompanies((data.data as GACCCompany[]) || []);
+      setTotalResults(data.total || 0);
+      setCurrentPage(0);
+    } catch (e: any) {
+      setError(e.message || "Ошибка при поиске. Попробуйте позже.");
+      setCompanies([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Загрузить все аккредитованные компании России
+  const loadAllRussian = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    setSearched(true);
+
+    try {
+      const resp = await fetch("/api/gacc?all=true", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!resp.ok) {
+        throw new Error(`API returned ${resp.status}`);
+      }
+
+      const data = await resp.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to fetch data");
+      }
+
+      setCompanies((data.data as GACCCompany[]) || []);
+      setTotalResults(data.total || 0);
+      setCurrentPage(0);
+    } catch (e: any) {
+      setError(e.message || "Ошибка при загрузке. Попробуйте позже.");
+      setCompanies([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Пагинация
+  const totalPages = Math.ceil(totalResults / itemsPerPage);
+  const paginatedCompanies = companies.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="text-2xl">🌾</span>
+            <span className="text-xl font-bold text-slate-900">ЗерноПоиск</span>
+          </Link>
+          <nav className="flex items-center gap-4">
+            <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600">Декларации</Link>
+            <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600">Цены</Link>
+            <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600">Comtrade</Link>
+            <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600">Фермеры</Link>
+          </nav>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        {/* Hero */}
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-bold text-slate-900 mb-2">
+            Проверка аккредитации в Китае
+          </h1>
+          <p className="text-slate-600">
+            Поиск аккредитованных российских компаний в системе GACC Китая
+          </p>
+        </div>
+
+        {/* Search Section */}
+        <div className="card mb-8">
+          <h2 className="text-lg font-semibold text-slate-900 mb-4">
+            Поиск компании
+          </h2>
+
+          <div className="flex gap-3 mb-4">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter" && !loading) {
+                  doSearch(searchQuery);
+                }
+              }}
+              placeholder="Введите название компании..."
+              className="flex-1 rounded-lg border border-slate-200 px-4 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+            />
+            <button
+              onClick={() => doSearch(searchQuery)}
+              disabled={loading || !searchQuery.trim()}
+              className="btn-primary"
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 animate-spin"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
+                  </svg>
+                  Поиск...
+                </span>
+              ) : (
+                "🔍 Поиск"
+              )}
+            </button>
+          </div>
+
+          <button
+            onClick={loadAllRussian}
+            disabled={loading}
+            className="btn-secondary w-full"
+          >
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <svg
+                  className="w-4 h-4 animate-spin"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                Загрузка...
+              </span>
+            ) : (
+              "Показать все РФ (зерно)"
+            )}
+          </button>
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div className="mb-6 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700 flex items-center justify-between">
+            <span>{error}</span>
+            <button
+              onClick={() => {
+                setError(null);
+                setSearched(false);
+                setCompanies([]);
+              }}
+              className="text-red-600 hover:text-red-800 font-medium"
+            >
+              Очистить
+            </button>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!searched && !loading && (
+          <div className="text-center py-20 text-slate-400">
+            <div className="text-6xl mb-4">🔍</div>
+            <p className="text-lg">
+              Введите название компании или загрузите все аккредитованные
+            </p>
+          </div>
+        )}
+
+        {/* No Results */}
+        {searched && !loading && companies.length === 0 && !error && (
+          <div className="text-center py-20 text-slate-400">
+            <div className="text-6xl mb-4">📋</div>
+            <p className="text-lg">
+              Компаний не найдено. Попробуйте другое название.
+            </p>
+          </div>
+        )}
+
+        {/* Results */}
+        {paginatedCompanies.length > 0 && (
+          <>
+            {/* Results Info */}
+            <div className="mb-6 flex items-center justify-between">
+              <div className="text-sm text-slate-600">
+                Найдено:{" "}
+                <span className="font-semibold text-slate-900">
+                  {totalResults}
+                </span>
+                {totalResults === 1 ? " компания" : " компаний"}
+              </div>
+              <div className="text-xs text-slate-400">
+                Страница {currentPage + 1} из {totalPages}
+              </div>
+            </div>
+
+            {/* Companies Grid */}
+            <div className="space-y-4 mb-8">
+              {paginatedCompanies.map((company, idx) => (
+                <CompanyCard key={idx} company={company} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  onClick={() =>
+                    setCurrentPage(Math.max(0, currentPage - 1))
+                  }
+                  disabled={currentPage === 0}
+                  className="btn-secondary text-sm disabled:opacity-30"
+                >
+                  ← Назад
+                </button>
+                <span className="text-sm text-slate-500">
+                  Страница {currentPage + 1} из {totalPages}
+                </span>
+                <button
+                  onClick={() =>
+                    setCurrentPage(Math.min(totalPages - 1, currentPage + 1))
+                  }
+                  disabled={currentPage >= totalPages - 1}
+                  className="btn-secondary text-sm disabled:opacity-30"
+                >
+                  Далее →
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ==================== Company Card Component ====================
+
+function CompanyCard({ company }: { company: GACCCompany }) {
+  const [expanded, setExpanded] = useState(false);
+  const isValid = isValidAccreditation(company.validTo);
+
+  return (
+    <div
+      className="card cursor-pointer transition-all"
+      onClick={() => setExpanded(!expanded)}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          {/* Header with validity */}
+          <div className="flex items-center gap-3 mb-2">
+            {isValid ? (
+              <span className="text-green-600">✓</span>
+            ) : (
+              <span className="text-red-600">✗</span>
+            )}
+            <span className={`badge-green text-xs`}>
+              {isValid ? "Действительна" : "Истекла"}
+            </span>
+          </div>
+
+          {/* Company Name (Russian) */}
+          <h3 className="text-base font-semibold text-slate-900 truncate">
+            {company.corpNameMo || "—"}
+          </h3>
+
+          {/* Company Name (English) */}
+          <p className="text-sm text-slate-600 truncate">
+            {company.corpNameEn || "—"}
+          </p>
+
+          {/* Address */}
+          <p className="text-xs text-slate-500 mt-2 truncate">
+            📍 {company.corpAddrNameMo || "—"}
+          </p>
+
+          {/* Products */}
+          <div className="mt-2 flex flex-wrap gap-2">
+            <span className="badge-blue text-xs">
+              {company.prodNameCn || "—"}
+            </span>
+            {company.prodNameEn && (
+              <span className="text-xs text-slate-500">
+                ({company.prodNameEn})
+              </span>
+            )}
+          </div>
+        </div>
+
+        <svg
+          className={`w-5 h-5 text-slate-300 flex-shrink-0 transition-transform ${
+            expanded ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </div>
+
+      {/* Expanded Content */}
+      {expanded && (
+        <div className="mt-4 pt-4 border-t border-slate-100 space-y-3 text-sm">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs text-slate-400 mb-1">Номер в Китае</p>
+              <p className="font-mono text-xs text-slate-900">
+                {company.chinaRegNo || "—"}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs text-slate-400 mb-1">
+                Номер за границей
+              </p>
+              <p className="font-mono text-xs text-slate-900">
+                {company.overseasOfficialRegNo || "—"}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs text-slate-400 mb-1">Действительна с</p>
+              <p className="text-sm text-slate-900">
+                {formatDate(company.validFrom) || "—"}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs text-slate-400 mb-1">Действительна до</p>
+              <p className={`text-sm font-semibold ${isValid ? "text-green-700" : "text-red-700"}`}>
+                {formatDate(company.validTo) || "—"}
+              </p>
+            </div>
+          </div>
+
+          {company.corpTypeNameEn && (
+            <div>
+              <p className="text-xs text-slate-400 mb-1">Тип компании</p>
+              <p className="text-sm text-slate-900">
+                {company.corpTypeNameEn}
+              </p>
+            </div>
+          )}
+
+          {/* Contacts */}
+          <div className="bg-slate-50 rounded-lg p-3 space-y-2">
+            <p className="text-xs font-semibold text-slate-700">Контакты</p>
+            {company.corpContactTel && (
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400">📞</span>
+                <a
+                  href={`tel:${company.corpContactTel}`}
+                  className="text-xs text-primary-600 hover:underline truncate"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {company.corpContactTel}
+                </a>
+              </div>
+            )}
+            {company.corpContactEmail && (
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400">✉️</span>
+                <a
+                  href={`mailto:${company.corpContactEmail}`}
+                  className="text-xs text-primary-600 hover:underline truncate"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {company.corpContactEmail}
+                </a>
+              </div>
+            )}
+            {!company.corpContactTel && !company.corpContactEmail && (
+              <p className="text-xs text-slate-400">Контакты не указаны</p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

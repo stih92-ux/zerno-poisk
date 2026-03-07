@@ -12,16 +12,13 @@ export default function HomePage() {
             <span className="text-2xl">🌾</span>
             <span className="text-xl font-bold text-slate-900">ЗерноПоиск</span>
           </div>
-          <nav className="flex items-center gap-6">
-            <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">
-              Поиск деклараций
-            </Link>
-            <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">
-              Цены
-            </Link>
-            <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">
-              Telegram-бот
-            </a>
+          <nav className="flex items-center gap-4">
+            <Link href="/search" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Декларации</Link>
+            <Link href="/prices" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Цены</Link>
+            <Link href="/comtrade" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Comtrade</Link>
+            <Link href="/gacc" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">GACC</Link>
+            <Link href="/farmers" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Фермеры</Link>
+            <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Бот</a>
           </nav>
         </div>
       </header>
@@ -60,18 +57,18 @@ export default function HomePage() {
           </p>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: "🔍", title: "Поиск деклараций", desc: "13 культур, 68 регионов, 5 сегментов. Фильтрация по объёму и датам." },
-              { icon: "📊", title: "Цены на зерно", desc: "Биржевые цены MOEX, региональные цены ZOL.RU, объявления IDK.RU." },
-              { icon: "🌏", title: "Comtrade", desc: "Международная торговля зерном. Данные UN Comtrade по импорту/экспорту." },
-              { icon: "🇨🇳", title: "GACC Китай", desc: "Проверка аккредитации компаний для экспорта зерна в Китай." },
-              { icon: "🌾", title: "База фермеров", desc: "27 000+ КФХ и сельхозкомпаний с контактами и площадями." },
-              { icon: "📥", title: "Экспорт CSV", desc: "Выгрузка результатов поиска с группировкой по компаниям." },
+              { icon: "🔍", title: "Поиск деклараций", desc: "13 культур, 68 регионов, 5 сегментов. Фильтрация по объёму и датам.", href: "/search" },
+              { icon: "📊", title: "Цены на зерно", desc: "Биржевые цены MOEX, региональные цены ZOL.RU, объявления IDK.RU.", href: "/prices" },
+              { icon: "🌏", title: "Comtrade", desc: "Международная торговля зерном. Данные UN Comtrade по импорту/экспорту.", href: "/comtrade" },
+              { icon: "🇨🇳", title: "GACC Китай", desc: "Проверка аккредитации компаний для экспорта зерна в Китай.", href: "/gacc" },
+              { icon: "🌾", title: "База фермеров", desc: "27 000+ КФХ и сельхозкомпаний с контактами и площадями.", href: "/farmers" },
+              { icon: "📥", title: "Экспорт CSV", desc: "Выгрузка результатов поиска с группировкой по компаниям.", href: "/search" },
             ].map((f, i) => (
-              <div key={i} className="card">
+              <Link key={i} href={f.href} className="card hover:shadow-lg transition-shadow">
                 <div className="text-3xl mb-4">{f.icon}</div>
                 <h3 className="text-lg font-semibold text-slate-900">{f.title}</h3>
                 <p className="mt-2 text-sm text-slate-500">{f.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
