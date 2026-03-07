@@ -157,7 +157,7 @@ export default function FarmDatabaseKFHArticle() {
             <ul className="pl-6 list-disc space-y-2 mb-6">
               <li className="text-base leading-relaxed"><strong>По культуре:</strong> выберите интересующую культуру</li>
               <li className="text-base leading-relaxed"><strong>По региону:</strong> Краснодарский край, Тамбовская область, Саратовская область и т.д.</li>
-              <li className="text-base leading-relaxed"><strong>По размеру хозяйства:</strong> малые (< 100 га), средние (100-1000 га), крупные (> 1000 га)</li>
+              <li className="text-base leading-relaxed"><strong>По размеру хозяйства:</strong> малые (&lt; 100 га), средние (100-1000 га), крупные (&gt; 1000 га)</li>
               <li className="text-base leading-relaxed"><strong>По надёжности:</strong> если доступна информация о проверенных партнёрах</li>
             </ul>
 
@@ -209,7 +209,7 @@ export default function FarmDatabaseKFHArticle() {
               <li className="text-base leading-relaxed"><strong>КФХ (Крестьянское Фермерское Хозяйство)</strong> — семейное хозяйство, обычно размер 100-500 га, часто специализируются на одной культуре</li>
               <li className="text-base leading-relaxed"><strong>ИП (Индивидуальный Предприниматель)</strong> — фермер, зарегистрированный как ИП, обычно небольшие объёмы</li>
               <li className="text-base leading-relaxed"><strong>ООО (Общество с Ограниченной Ответственностью)</strong> — компания, часто среднего размера (500-5000 га)</li>
-              <li className="text-base leading-relaxed"><strong>ОАО/ПАО (Открытое/Публичное Акционерное Общество)</strong> — крупные агрохолдинги (> 5000 га), стабильные и надёжные партнёры</li>
+              <li className="text-base leading-relaxed"><strong>ОАО/ПАО (Открытое/Публичное Акционерное Общество)</strong> — крупные агрохолдинги (&gt; 5000 га), стабильные и надёжные партнёры</li>
               <li className="text-base leading-relaxed"><strong>Муниципальные предприятия</strong> — государственные или муниципальные хозяйства (редко производят зерно на продажу)</li>
             </ul>
 
@@ -261,7 +261,7 @@ export default function FarmDatabaseKFHArticle() {
               Практический совет: как выбрать лучшего поставщика
             </h2>
             <p className="text-base leading-relaxed mb-6">
-              <strong>1. Размер хозяйства</strong> — чем больше, тем надёжнее. Крупные хозяйства (> 500 га) обычно более организованы и имеют системы контроля качества.
+              <strong>1. Размер хозяйства</strong> — чем больше, тем надёжнее. Крупные хозяйства (&gt; 500 га) обычно более организованы и имеют системы контроля качества.
             </p>
             <p className="text-base leading-relaxed mb-6">
               <strong>2. История работы</strong> — проверьте деклараций, которые они выставляли. Если хозяйство постоянно выставляет декларации одного и того же класса, это признак стабильности.
