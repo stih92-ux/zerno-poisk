@@ -34,7 +34,8 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               // Скрипты: наши + telegram виджет + inline для theme-скрипта
-              "script-src 'self' 'unsafe-inline' https://telegram.org",
+              // unsafe-eval нужен для Telegram Login Widget (telegram-widget.js использует eval)
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://telegram.org",
               // Стили: наши + inline (Tailwind)
               "style-src 'self' 'unsafe-inline'",
               // Картинки: наши + Telegram аватары + Unsplash
