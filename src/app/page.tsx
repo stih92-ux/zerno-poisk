@@ -200,25 +200,34 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { slug: "wheat-quality-gost", title: "Классы пшеницы по ГОСТ — как определить качество зерна", date: "10 мар 2026" },
-              { slug: "kfh-registration", title: "КФХ — что это и как зарегистрировать фермерское хозяйство", date: "9 мар 2026" },
-              { slug: "grain-export-guide", title: "Как экспортировать зерно из России — пошаговая инструкция", date: "8 мар 2026" },
-              { slug: "farmer-subsidies-2026", title: "Субсидии для фермеров на зерно в 2026 году", date: "9 мар 2026" },
-              { slug: "moex-grain-quotes", title: "Биржевые котировки зерна на MOEX", date: "7 мар 2026" },
-              { slug: "tr-ts-015-2011", title: "ТР ТС 015/2011 — технический регламент на зерно", date: "6 мар 2026" },
+              { slug: "wheat-quality-gost", title: "Классы пшеницы по ГОСТ — как определить качество зерна", img: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=300&fit=crop&q=80" },
+              { slug: "kfh-registration", title: "КФХ — что это и как зарегистрировать фермерское хозяйство", img: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&h=300&fit=crop&q=80" },
+              { slug: "grain-export-guide", title: "Как экспортировать зерно из России — пошаговая инструкция", img: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&h=300&fit=crop&q=80" },
+              { slug: "farmer-subsidies-2026", title: "Субсидии для фермеров на зерно в 2026 году", img: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=300&fit=crop&q=80" },
+              { slug: "moex-grain-quotes", title: "Биржевые котировки зерна на MOEX", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=300&fit=crop&q=80" },
+              { slug: "tr-ts-015-2011", title: "ТР ТС 015/2011 — технический регламент на зерно", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&h=300&fit=crop&q=80" },
             ].map((a) => (
               <Link
                 key={a.slug}
                 href={`/blog/${a.slug}`}
-                className="group rounded-xl border border-gray-100 dark:border-gray-800 p-5 hover:border-gray-200 dark:hover:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-all"
+                className="group rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-gray-200 dark:hover:border-gray-700 hover:shadow-md transition-all"
               >
-                <span className="text-xs text-gray-400 dark:text-gray-500">{a.date}</span>
-                <h3 className="mt-2 text-sm font-semibold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
-                  {a.title}
-                </h3>
-                <span className="mt-3 inline-block text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Читать →
-                </span>
+                <div className="relative h-36 overflow-hidden">
+                  <img
+                    src={a.img}
+                    alt={a.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
+                    {a.title}
+                  </h3>
+                  <span className="mt-2 inline-block text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Читать →
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
