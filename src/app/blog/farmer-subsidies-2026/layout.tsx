@@ -18,28 +18,40 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Субсидии для фермеров на зерно в 2026 году — полный гид",
-  datePublished: "2026-03-09",
-  dateModified: "2026-03-09",
-  description:
-    "Полное руководство по государственным субсидиям для фермеров в 2026: виды субсидий, гранты КФХ, Агростартап, компенсации на семена, как подать заявку и избежать отказа.",
-  url: "https://zerno-poisk.ru/blog/farmer-subsidies-2026",
-  author: {
-    "@type": "Organization",
-    name: "ЗерноПоиск",
-    url: "https://zerno-poisk.ru",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "ЗерноПоиск",
-    url: "https://zerno-poisk.ru",
-  },
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": "https://zerno-poisk.ru/blog/farmer-subsidies-2026",
-  },
-  inLanguage: "ru",
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "Субсидии для фермеров на зерно в 2026 году — полный гид",
+      datePublished: "2026-03-09",
+      dateModified: "2026-03-09",
+      description:
+        "Полное руководство по государственным субсидиям для фермеров в 2026: виды субсидий, гранты КФХ, Агростартап, компенсации на семена, как подать заявку и избежать отказа.",
+      url: "https://zerno-poisk.ru/blog/farmer-subsidies-2026",
+      author: {
+        "@type": "Organization",
+        name: "ЗерноПоиск",
+        url: "https://zerno-poisk.ru",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "ЗерноПоиск",
+        url: "https://zerno-poisk.ru",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://zerno-poisk.ru/blog/farmer-subsidies-2026",
+      },
+      inLanguage: "ru",
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: "https://zerno-poisk.ru" },
+        { "@type": "ListItem", position: 2, name: "Блог", item: "https://zerno-poisk.ru/blog" },
+        { "@type": "ListItem", position: 3, name: "Субсидии для фермеров 2026" },
+      ],
+    },
+  ],
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

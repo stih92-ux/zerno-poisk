@@ -17,31 +17,42 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
+  "@graph": [
     {
-      "@type": "Question",
-      name: "Откуда берутся данные о фермерах?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Из открытых данных ЕГРЮЛ/ЕГРИП (ФНС), Росстата и отраслевых справочников. Для каждого КФХ: название, ФИО главы, контакты, регион, посевные площади.",
-      },
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Откуда берутся данные о фермерах?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Из открытых данных ЕГРЮЛ/ЕГРИП (ФНС), Росстата и отраслевых справочников. Для каждого КФХ: название, ФИО главы, контакты, регион, посевные площади.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Как связаться с фермером напрямую?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Нажмите на карточку хозяйства — откроются контакты: телефон и email главы КФХ.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Можно ли фильтровать фермеров по культуре и площади?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Да, доступна фильтрация по зерновым культурам и минимальной площади посева в гектарах.",
+          },
+        },
+      ],
     },
     {
-      "@type": "Question",
-      name: "Как связаться с фермером напрямую?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Нажмите на карточку хозяйства — откроются контакты: телефон и email главы КФХ.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Можно ли фильтровать фермеров по культуре и площади?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Да, доступна фильтрация по зерновым культурам и минимальной площади посева в гектарах.",
-      },
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: "https://zerno-poisk.ru" },
+        { "@type": "ListItem", position: 2, name: "База фермеров" },
+      ],
     },
   ],
 };

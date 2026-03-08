@@ -182,6 +182,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Latest Blog Articles */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Блог</h2>
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Статьи о зерновом рынке</p>
+            </div>
+            <Link href="/blog" className="text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline">
+              Все статьи →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { slug: "wheat-quality-gost", title: "Классы пшеницы по ГОСТ — как определить качество зерна", date: "10 мар 2026" },
+              { slug: "kfh-registration", title: "КФХ — что это и как зарегистрировать фермерское хозяйство", date: "9 мар 2026" },
+              { slug: "grain-export-guide", title: "Как экспортировать зерно из России — пошаговая инструкция", date: "8 мар 2026" },
+              { slug: "farmer-subsidies-2026", title: "Субсидии для фермеров на зерно в 2026 году", date: "9 мар 2026" },
+              { slug: "moex-grain-quotes", title: "Биржевые котировки зерна на MOEX", date: "7 мар 2026" },
+              { slug: "tr-ts-015-2011", title: "ТР ТС 015/2011 — технический регламент на зерно", date: "6 мар 2026" },
+            ].map((a) => (
+              <Link
+                key={a.slug}
+                href={`/blog/${a.slug}`}
+                className="group rounded-xl border border-gray-100 dark:border-gray-800 p-5 hover:border-gray-200 dark:hover:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-all"
+              >
+                <span className="text-xs text-gray-400 dark:text-gray-500">{a.date}</span>
+                <h3 className="mt-2 text-sm font-semibold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
+                  {a.title}
+                </h3>
+                <span className="mt-3 inline-block text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                  Читать →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="pb-20">
         <div className="mx-auto max-w-6xl px-4">

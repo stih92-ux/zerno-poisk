@@ -18,28 +18,40 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Биржевые котировки зерна на MOEX — как торговать зерном на бирже",
-  datePublished: "2026-03-07",
-  dateModified: "2026-03-07",
-  description:
-    "Полное руководство по торговле зерном на Московской бирже MOEX: котировки, типы контрактов, как начать торговать, инструменты и стратегии.",
-  url: "https://zerno-poisk.ru/blog/moex-grain-quotes",
-  author: {
-    "@type": "Organization",
-    name: "ЗерноПоиск",
-    url: "https://zerno-poisk.ru",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "ЗерноПоиск",
-    url: "https://zerno-poisk.ru",
-  },
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": "https://zerno-poisk.ru/blog/moex-grain-quotes",
-  },
-  inLanguage: "ru",
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "Биржевые котировки зерна на MOEX — как торговать зерном на бирже",
+      datePublished: "2026-03-07",
+      dateModified: "2026-03-07",
+      description:
+        "Полное руководство по торговле зерном на Московской бирже MOEX: котировки, типы контрактов, как начать торговать, инструменты и стратегии.",
+      url: "https://zerno-poisk.ru/blog/moex-grain-quotes",
+      author: {
+        "@type": "Organization",
+        name: "ЗерноПоиск",
+        url: "https://zerno-poisk.ru",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "ЗерноПоиск",
+        url: "https://zerno-poisk.ru",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://zerno-poisk.ru/blog/moex-grain-quotes",
+      },
+      inLanguage: "ru",
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: "https://zerno-poisk.ru" },
+        { "@type": "ListItem", position: 2, name: "Блог", item: "https://zerno-poisk.ru/blog" },
+        { "@type": "ListItem", position: 3, name: "Котировки зерна MOEX" },
+      ],
+    },
+  ],
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

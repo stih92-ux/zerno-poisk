@@ -17,31 +17,42 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
+  "@graph": [
     {
-      "@type": "Question",
-      name: "Что такое UN Comtrade?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "UN Comtrade — крупнейшая база данных ООН по международной торговле товарами. Содержит данные об экспорте и импорте более чем 200 стран, классифицированные по кодам HS.",
-      },
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Что такое UN Comtrade?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "UN Comtrade — крупнейшая база данных ООН по международной торговле товарами. Содержит данные об экспорте и импорте более чем 200 стран, классифицированные по кодам HS.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "За какой период доступны данные?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "На ЗерноПоиск доступны данные за последние 4 года. Некоторые страны публикуют данные с задержкой 3–6 месяцев.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Какие страны являются крупнейшими импортёрами российского зерна?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Основные покупатели: Турция, Египет, Бангладеш, Саудовская Аравия и страны Африки.",
+          },
+        },
+      ],
     },
     {
-      "@type": "Question",
-      name: "За какой период доступны данные?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "На ЗерноПоиск доступны данные за последние 4 года. Некоторые страны публикуют данные с задержкой 3–6 месяцев.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Какие страны являются крупнейшими импортёрами российского зерна?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Основные покупатели: Турция, Египет, Бангладеш, Саудовская Аравия и страны Африки.",
-      },
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: "https://zerno-poisk.ru" },
+        { "@type": "ListItem", position: 2, name: "Экспорт Comtrade" },
+      ],
     },
   ],
 };

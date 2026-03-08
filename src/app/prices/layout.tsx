@@ -17,31 +17,42 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
+  "@graph": [
     {
-      "@type": "Question",
-      name: "Какие источники цен используются?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "MOEX (Московская биржа) — фьючерсные контракты; ZOL.RU — региональные цены закупки с базисом поставки; IDK.RU — объявления о покупке и продаже зерна.",
-      },
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Какие источники цен используются?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "MOEX (Московская биржа) — фьючерсные контракты; ZOL.RU — региональные цены закупки с базисом поставки; IDK.RU — объявления о покупке и продаже зерна.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Как часто обновляются котировки?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Биржевые данные MOEX обновляются в режиме торговых сессий. Региональные цены ZOL и объявления IDK обновляются ежедневно.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Что такое базис поставки EXW и FOB?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "EXW — цена на воротах склада без транспортировки. FOB — цена с доставкой до порта и погрузкой на судно. CPT — цена с доставкой до указанного пункта.",
+          },
+        },
+      ],
     },
     {
-      "@type": "Question",
-      name: "Как часто обновляются котировки?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Биржевые данные MOEX обновляются в режиме торговых сессий. Региональные цены ZOL и объявления IDK обновляются ежедневно.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Что такое базис поставки EXW и FOB?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "EXW — цена на воротах склада без транспортировки. FOB — цена с доставкой до порта и погрузкой на судно. CPT — цена с доставкой до указанного пункта.",
-      },
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: "https://zerno-poisk.ru" },
+        { "@type": "ListItem", position: 2, name: "Цены на зерно" },
+      ],
     },
   ],
 };

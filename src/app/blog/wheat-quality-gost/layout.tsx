@@ -18,28 +18,40 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Классы пшеницы по ГОСТ — как определить качество зерна",
-  datePublished: "2026-03-10",
-  dateModified: "2026-03-10",
-  description:
-    "Полное описание классификации пшеницы по ГОСТ 9353-2016: 5 классов качества, параметры глютена, белка, влажности, упавших зёрен. Как читать сертификаты и влияние класса на цену.",
-  url: "https://zerno-poisk.ru/blog/wheat-quality-gost",
-  author: {
-    "@type": "Organization",
-    name: "ЗерноПоиск",
-    url: "https://zerno-poisk.ru",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "ЗерноПоиск",
-    url: "https://zerno-poisk.ru",
-  },
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": "https://zerno-poisk.ru/blog/wheat-quality-gost",
-  },
-  inLanguage: "ru",
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "Классы пшеницы по ГОСТ — как определить качество зерна",
+      datePublished: "2026-03-10",
+      dateModified: "2026-03-10",
+      description:
+        "Полное описание классификации пшеницы по ГОСТ 9353-2016: 5 классов качества, параметры глютена, белка, влажности, упавших зёрен. Как читать сертификаты и влияние класса на цену.",
+      url: "https://zerno-poisk.ru/blog/wheat-quality-gost",
+      author: {
+        "@type": "Organization",
+        name: "ЗерноПоиск",
+        url: "https://zerno-poisk.ru",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "ЗерноПоиск",
+        url: "https://zerno-poisk.ru",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://zerno-poisk.ru/blog/wheat-quality-gost",
+      },
+      inLanguage: "ru",
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: "https://zerno-poisk.ru" },
+        { "@type": "ListItem", position: 2, name: "Блог", item: "https://zerno-poisk.ru/blog" },
+        { "@type": "ListItem", position: 3, name: "Классы пшеницы ГОСТ" },
+      ],
+    },
+  ],
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
