@@ -1,8 +1,18 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Данные Comtrade по экспорту зерна — статистика ООН | ЗерноПоиск",
-  description: "Статистика экспорта и импорта зерна из базы UN Comtrade. Объёмы торговли пшеницей, ячменём, кукурузой по странам.",
+  title: "Экспорт зерна — статистика UN Comtrade по 170+ странам",
+  description:
+    "Международная торговля зерном: данные UN Comtrade по экспорту и импорту пшеницы, ячменя, кукурузы. Объёмы и стоимость поставок по 170+ странам мира.",
+  alternates: {
+    canonical: "/comtrade",
+  },
+  openGraph: {
+    title: "Экспорт зерна — статистика UN Comtrade по 170+ странам",
+    description:
+      "Данные ООН по международной торговле зерном. Экспорт, импорт, объёмы по странам.",
+    url: "/comtrade",
+  },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
