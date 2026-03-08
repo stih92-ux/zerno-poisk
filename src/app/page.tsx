@@ -116,20 +116,22 @@ export default function HomePage() {
             Аналитика зернового рынка России
           </h1>
           <p className="mt-4 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
-            Декларации, цены, экспорт и база фермеров — всё в одном сервисе. Бесплатно.
+            Декларации, цены, экспорт и база фермеров — всё в одном сервисе. 2 дня бесплатно.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
-            <Link
-              href="/search"
+            <a
+              href="https://t.me/agro_analizbot"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-gray-900 dark:bg-white px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
             >
-              Начать поиск →
-            </Link>
+              Попробовать 2 дня бесплатно →
+            </a>
             <Link
-              href="/prices"
+              href="/search"
               className="rounded-full bg-gray-100 dark:bg-gray-800 px-6 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
-              Смотреть цены
+              Смотреть инструменты
             </Link>
           </div>
         </div>
@@ -221,29 +223,84 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="pb-20">
+      {/* Pricing / Trial */}
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 p-8 sm:p-12 text-center">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Начните бесплатно</h2>
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-              Полный доступ ко всем инструментам. Без регистрации, без оплаты.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3 justify-center">
-              <Link
-                href="/search"
-                className="rounded-full bg-gray-900 dark:bg-white px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
-              >
-                Искать декларации
-              </Link>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Начните с пробного периода</h2>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">2 дня полного доступа — бесплатно, без ограничений</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {/* Trial */}
+            <div className="rounded-2xl border-2 border-emerald-500 dark:border-emerald-400 p-6 sm:p-8 relative">
+              <div className="absolute -top-3 left-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                ПРОБНЫЙ
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-2">2 дня бесплатно</h3>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mt-3">0 ₽</p>
+              <ul className="mt-5 space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Поиск по 500 000+ деклараций</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Котировки зерна в реальном времени</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Данные UN Comtrade и GACC</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>База 27 000+ фермеров</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Полный доступ на 2 дня</li>
+              </ul>
               <a
                 href="https://t.me/agro_analizbot"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-emerald-600 hover:bg-emerald-700 px-6 py-2.5 text-sm font-medium text-white transition-colors"
+              >
+                Активировать в Telegram →
+              </a>
+            </div>
+            {/* Paid */}
+            <div className="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Полный доступ</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">После пробного периода</p>
+              <ul className="mt-5 space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Все инструменты без ограничений</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Уведомления о новых декларациях</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Контакты фермеров и компаний</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Приоритетная поддержка</li>
+                <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Ежедневные обновления данных</li>
+              </ul>
+              <a
+                href="https://t.me/agro_analizbot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-gray-900 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-200 px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 transition-colors"
+              >
+                Подробнее в Telegram →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="pb-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 p-8 sm:p-12 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Готовы попробовать?</h2>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+              Активируйте пробный период в Telegram-боте и получите 2 дня полного доступа ко всем инструментам.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 justify-center">
+              <a
+                href="https://t.me/agro_analizbot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-gray-900 dark:bg-white px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
+              >
+                Начать пробный период →
+              </a>
+              <Link
+                href="/blog"
                 className="rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-6 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
-                Открыть бот в Telegram
-              </a>
+                Читать блог
+              </Link>
             </div>
           </div>
         </div>
