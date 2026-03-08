@@ -3,6 +3,7 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import UserMenu from "@/components/UserMenu";
+import NewsWidget from "@/components/NewsWidget";
 
 const features = [
   {
@@ -175,6 +176,13 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* News Widget */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <NewsWidget />
         </div>
       </section>
 
