@@ -118,7 +118,7 @@ export default function HomePage() {
               href="https://t.me/agro_analizbot"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-gray-900 dark:bg-white px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
+              className="rounded-full bg-[#2d7a2d] px-6 py-2.5 text-sm font-medium text-white hover:bg-[#236b23] transition-colors"
             >
               Попробовать 2 дня бесплатно →
             </a>
