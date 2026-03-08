@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
+import UserMenu from "@/components/UserMenu";
 import { useState, useEffect } from "react";
 
 export default function BarleyPrices2026Article() {
@@ -60,7 +61,7 @@ export default function BarleyPrices2026Article() {
             <Link href="/gacc" className="text-sm font-medium text-white/70 hover:text-white transition-colors">GACC</Link>
             <Link href="/farmers" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Фермеры</Link>
             <Link href="/blog" className="text-sm font-medium text-white hover:text-white transition-colors">Блог</Link>
-            <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Бот</a>
+            <UserMenu />
             <ThemeToggle />
           </nav>
         </div>

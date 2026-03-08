@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
+import UserMenu from "@/components/UserMenu";
 
 const features = [
   {
@@ -93,14 +94,7 @@ export default function HomePage() {
           </nav>
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <a
-              href="https://t.me/agro_analizbot"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-gray-900 dark:bg-white px-4 py-1.5 text-[13px] font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
-            >
-              Telegram-бот
-            </a>
+            <UserMenu />
           </div>
         </div>
       </header>
