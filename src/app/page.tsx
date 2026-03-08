@@ -55,12 +55,12 @@ const features = [
     ),
   },
   {
-    title: "Экспорт данных",
-    desc: "Выгрузка в CSV с группировкой по компаниям для дальнейшего анализа.",
-    href: "/search",
+    title: "Блог и аналитика",
+    desc: "Статьи о зерновом рынке, ценах, экспорте и субсидиях для фермеров.",
+    href: "/blog",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
       </svg>
     ),
   },

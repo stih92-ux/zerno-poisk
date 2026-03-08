@@ -232,7 +232,7 @@ export default function GrainDeclarationsArticle() {
               <li className="text-base leading-relaxed"><strong>Информация о компании</strong> — название, регион, объём и класс зерна</li>
               <li className="text-base leading-relaxed"><strong>Контактные данные</strong> — свяжитесь напрямую с продавцом</li>
               <li className="text-base leading-relaxed"><strong>Фильтрация по параметрам</strong> — выберите зерно нужного класса, культуры и объёма</li>
-              <li className="text-base leading-relaxed"><strong>Выгрузка в CSV</strong> — экспортируйте список контактов для дальнейшей работы</li>
+              <li className="text-base leading-relaxed"><strong>Telegram-бот</strong> — получайте уведомления о новых декларациях через <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener noreferrer" className="text-[#2d7a2d] hover:underline">@agro_analizbot</a></li>
             </ul>
             <p className="text-base leading-relaxed mb-6">
               Помимо этого, на нашей платформе вы можете найти:

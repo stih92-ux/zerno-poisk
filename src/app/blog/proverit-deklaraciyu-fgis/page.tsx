@@ -287,7 +287,7 @@ export default function ProveritDeklaraciuFgisArticle() {
               <li className="text-base leading-relaxed"><strong>Достоверные данные о производителях</strong> — известны реальные контакты и история компаний</li>
               <li className="text-base leading-relaxed"><strong>Удобная система поиска</strong> — найдите зерно по всем параметрам за несколько секунд</li>
               <li className="text-base leading-relaxed"><strong>Фильтрация по регионам и объёмам</strong> — выберите поставщиков, подходящих вам</li>
-              <li className="text-base leading-relaxed"><strong>Экспорт в CSV</strong> — скачайте контакты и создайте собственную базу</li>
+              <li className="text-base leading-relaxed"><strong>Telegram-бот</strong> — оперативные уведомления через <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener noreferrer" className="text-[#2d7a2d] hover:underline">@agro_analizbot</a></li>
             </ul>
 
             <p className="text-base leading-relaxed mb-6">

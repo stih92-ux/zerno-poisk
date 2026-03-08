@@ -42,8 +42,7 @@ export default function SearchPage() {
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
 
-  // Экспорт
-  const [exporting, setExporting] = useState(false);
+
 
   // Toggle helper
   const toggle = (list: string[], setList: (v: string[]) => void, code: string) => {
@@ -108,38 +107,7 @@ export default function SearchPage() {
     [selectedProducts, selectedRegions, selectedSegments, minVolume, dateFrom, dateTo]
   );
 
-  // Экспорт CSV
-  const doExport = async (groupByCompany = false) => {
-    if (selectedProducts.length === 0) return;
-    setExporting(true);
-    try {
-      const resp = await fetch("/api/fsa/export", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          products: selectedProducts,
-          regions: selectedRegions,
-          segments: selectedSegments,
-          minVolume: minVolume ? Number(minVolume) : undefined,
-          dateFrom: dateFrom || undefined,
-          dateTo: dateTo || undefined,
-          groupByCompany,
-        }),
-      });
-      if (!resp.ok) throw new Error("Export failed");
-      const blob = await resp.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = resp.headers.get("Content-Disposition")?.split("filename=")[1]?.replace(/"/g, "") || "export.csv";
-      a.click();
-      URL.revokeObjectURL(url);
-    } catch {
-      setError("Ошибка экспорта");
-    } finally {
-      setExporting(false);
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -364,16 +332,6 @@ export default function SearchPage() {
               )}
             </button>
 
-            {searched && results.length > 0 && (
-              <div className="flex gap-2">
-                <button onClick={() => doExport(false)} disabled={exporting} className="btn-secondary flex-1 text-xs">
-                  📥 CSV
-                </button>
-                <button onClick={() => doExport(true)} disabled={exporting} className="btn-secondary flex-1 text-xs">
-                  🏢 По компаниям
-                </button>
-              </div>
-            )}
           </aside>
 
           {/* ===== РЕЗУЛЬТАТЫ ===== */}
@@ -458,10 +416,6 @@ export default function SearchPage() {
             <details className="group">
               <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Как часто обновляется база деклараций?</summary>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>База синхронизируется с реестром Росаккредитации ежедневно. Новые декларации появляются в системе в течение 24 часов после регистрации в ФГИС. На данный момент база содержит более 500 000 документов за период 2020–2026 годов.</p>
-            </details>
-            <details className="group">
-              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Можно ли скачать результаты поиска?</summary>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Да, после выполнения поиска доступна выгрузка в формате CSV. Вы можете скачать результаты в виде списка деклараций или сгруппировать их по компаниям — это удобно для анализа поставщиков и сравнения объёмов.</p>
             </details>
             <details className="group">
               <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Какие культуры доступны для поиска?</summary>

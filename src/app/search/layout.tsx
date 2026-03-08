@@ -37,14 +37,6 @@ const jsonLd = {
     },
     {
       "@type": "Question",
-      name: "Можно ли скачать результаты поиска?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Да, после поиска доступна выгрузка в формате CSV — в виде списка деклараций или с группировкой по компаниям.",
-      },
-    },
-    {
-      "@type": "Question",
       name: "Какие культуры доступны для поиска?",
       acceptedAnswer: {
         "@type": "Answer",

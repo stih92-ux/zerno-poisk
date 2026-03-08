@@ -184,7 +184,7 @@ export default function FarmerSubsidies2026Article() {
             </p>
             <ul className="pl-6 list-disc space-y-2 mb-6">
               <li className="text-base leading-relaxed"><strong>Процентная ставка:</strong> от 3-5% годовых (вместо рыночных 10-15%)</li>
-              <li className="text-base leading-reiched"><strong>Размер кредита:</strong> от 100 000 до 5 млн рублей</li>
+              <li className="text-base leading-relaxed"><strong>Размер кредита:</strong> от 100 000 до 5 млн рублей</li>
               <li className="text-base leading-relaxed"><strong>Сроки кредита:</strong> 1-5 лет</li>
               <li className="text-base leading-relaxed"><strong>Условия:</strong> кредит выдаётся аккредитованными банками (Сбербанк, ВТБ, АЛТ-инвест и другие)</li>
             </ul>

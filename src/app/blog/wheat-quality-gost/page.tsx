@@ -333,7 +333,7 @@ export default function WheatQualityGostArticle() {
               <li className="text-base leading-relaxed"><strong>Сравнивайте предложения:</strong> на <Link href="/search" className="text-[#2d7a2d] hover:underline">ЗерноПоиск</Link> вы можете увидеть все доступные партии пшеницы с их параметрами</li>
               <li className="text-base leading-relaxed"><strong>Проверяйте по <Link href="/prices" className="text-[#2d7a2d] hover:underline">рыночным ценам</Link>:</strong> убедитесь, что цена справедлива для данного класса</li>
               <li className="text-base leading-relaxed"><strong>Учитывайте логистику:</strong> пшеница из разных регионов может иметь разные цены из-за стоимости доставки</li>
-              <li className="text-base leading-relocateded"><strong>Заключайте контракты:</strong> фиксируйте параметры качества и цену в письменном виде</li>
+              <li className="text-base leading-relaxed"><strong>Заключайте контракты:</strong> фиксируйте параметры качества и цену в письменном виде</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-[#1c1c1c] dark:text-white mt-10 mb-4">

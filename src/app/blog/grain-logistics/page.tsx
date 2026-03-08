@@ -341,7 +341,7 @@ export default function GrainLogisticsArticle() {
             <ul className="pl-6 list-disc space-y-2 mb-6">
               <li className="text-base leading-relaxed">Оптимизируйте маршруты поставок: используйте систему планирования и отслеживания логистики</li>
               <li className="text-base leading-relaxed">Работайте с портами до сезона: договоритесь о выделении причалов и погрузочного оборудования</li>
-              <li className="text-base leading-relocateded">Используйте контейнеры и специальное оборудование для минимизации потерь зерна</li>
+              <li className="text-base leading-relaxed">Используйте контейнеры и специальное оборудование для минимизации потерь зерна</li>
               <li className="text-base leading-relaxed">Анализируйте данные Comtrade: смотрите, какие торговые потоки существуют, и планируйте закупки в соответствии с ними</li>
             </ul>
 

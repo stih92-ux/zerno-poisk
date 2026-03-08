@@ -272,28 +272,28 @@ export default function WheatExportRussiaArticle() {
             <h2 className="text-2xl font-bold text-[#1c1c1c] dark:text-white mt-10 mb-4">
               Риски и вызовы для экспорта пшеницы
             </h2>
-            <p className="text-base leading-relativness mb-6">
+            <p className="text-base leading-relaxed mb-6">
               Несмотря на сильные позиции России на мировом рынке пшеницы, существуют факторы, которые могут негативно повлиять на экспорт:
             </p>
             <ul className="pl-6 list-disc space-y-2 mb-6">
-              <li className="text-base leading-relativness"><strong>Геополитические ограничения:</strong> санкции могут усложнить логистику и доступ на некоторые рынки</li>
-              <li className="text-base leading-relativness"><strong>Конкуренция:</strong> США, ЕС и другие экспортёры активно расширяют свою долю на рынке</li>
+              <li className="text-base leading-relaxed"><strong>Геополитические ограничения:</strong> санкции могут усложнить логистику и доступ на некоторые рынки</li>
+              <li className="text-base leading-relaxed"><strong>Конкуренция:</strong> США, ЕС и другие экспортёры активно расширяют свою долю на рынке</li>
               <li className="text-base leading-relaxed"><strong>Климатические риски:</strong> засуха или другие стихийные бедствия могут сократить урожай</li>
-              <li className="text-base leading-relativness"><strong>Колебания мировых цен:</strong> слабые мировые цены на пшеницу снижают доходы экспортёров</li>
+              <li className="text-base leading-relaxed"><strong>Колебания мировых цен:</strong> слабые мировые цены на пшеницу снижают доходы экспортёров</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-[#1c1c1c] dark:text-white mt-10 mb-4">
               Практические рекомендации для экспортёров
             </h2>
-            <p className="text-base leading-relativness mb-6">
+            <p className="text-base leading-relaxed mb-6">
               Если вы занимаетесь экспортом пшеницы из России, вот несколько советов:
             </p>
             <ul className="pl-6 list-disc space-y-2 mb-6">
-              <li className="text-base leading-relativness"><strong>Следите за <Link href="/comtrade" className="text-[#2d7a2d] hover:underline">данными Comtrade</Link></strong> — анализируйте спрос в разных странах и выявляйте новые возможности</li>
-              <li className="text-base leading-relativness"><strong>Диверсифицируйте рынки</strong> — не полагайтесь на один-два крупных импортёра</li>
-              <li className="text-base leading-relativness"><strong>Поддерживайте качество</strong> — экспортная пшеница высокого качества получит премию на рынке</li>
-              <li className="text-base leading-relativness"><strong>Мониторьте <Link href="/prices" className="text-[#2d7a2d] hover:underline">мировые цены</Link></strong> — продавайте пшеницу на пике цен, избегайте экспорта при низких котировках</li>
-              <li className="text-base leading-relativness"><strong>Найдите прямого покупателя</strong> — используйте <Link href="/farmers" className="text-[#2d7a2d] hover:underline">платформу ЗерноПоиск</Link> для прямых контактов с импортёрами</li>
+              <li className="text-base leading-relaxed"><strong>Следите за <Link href="/comtrade" className="text-[#2d7a2d] hover:underline">данными Comtrade</Link></strong> — анализируйте спрос в разных странах и выявляйте новые возможности</li>
+              <li className="text-base leading-relaxed"><strong>Диверсифицируйте рынки</strong> — не полагайтесь на один-два крупных импортёра</li>
+              <li className="text-base leading-relaxed"><strong>Поддерживайте качество</strong> — экспортная пшеница высокого качества получит премию на рынке</li>
+              <li className="text-base leading-relaxed"><strong>Мониторьте <Link href="/prices" className="text-[#2d7a2d] hover:underline">мировые цены</Link></strong> — продавайте пшеницу на пике цен, избегайте экспорта при низких котировках</li>
+              <li className="text-base leading-relaxed"><strong>Найдите прямого покупателя</strong> — используйте <Link href="/farmers" className="text-[#2d7a2d] hover:underline">платформу ЗерноПоиск</Link> для прямых контактов с импортёрами</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-[#1c1c1c] dark:text-white mt-10 mb-4">

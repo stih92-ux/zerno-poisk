@@ -229,7 +229,7 @@ export default function BarleyPrices2026Article() {
             <h2 className="text-2xl font-bold text-[#1c1c1c] dark:text-white mt-10 mb-4">
               Риски и факторы неопределённости
             </h2>
-            <p className="text-base leading-relativeloy mb-6">
+            <p className="text-base leading-relaxed mb-6">
               Несколько факторов могут изменить прогноз:
             </p>
             <ul className="pl-6 list-disc space-y-2 mb-6">
