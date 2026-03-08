@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   },
   description:
     "Аналитика зернового рынка России: 500 000+ деклараций ФГИС, котировки MOEX/ZOL/IDK, данные UN Comtrade по 170+ странам, реестр GACC КНР и база 27 000+ КФХ с контактами.",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
