@@ -243,13 +243,13 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {/* Trial */}
-            <div className="rounded-2xl border-2 border-emerald-500 dark:border-emerald-400 p-6 sm:p-8 relative">
+            <div className="rounded-2xl border-2 border-emerald-500 dark:border-emerald-400 p-6 sm:p-8 relative flex flex-col">
               <div className="absolute -top-3 left-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
                 ПРОБНЫЙ
               </div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-2">2 дня бесплатно</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-3">0 ₽</p>
-              <ul className="mt-5 space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
+              <ul className="mt-5 space-y-2.5 text-sm text-gray-600 dark:text-gray-400 flex-grow">
                 <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Поиск по 500 000+ деклараций</li>
                 <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Котировки зерна в реальном времени</li>
                 <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Данные UN Comtrade и GACC</li>
@@ -266,10 +266,10 @@ export default function HomePage() {
               </a>
             </div>
             {/* Paid */}
-            <div className="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+            <div className="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 sm:p-8 flex flex-col">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">Полный доступ</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">После пробного периода</p>
-              <ul className="mt-5 space-y-2.5 text-sm text-gray-600 dark:text-gray-400">
+              <ul className="mt-5 space-y-2.5 text-sm text-gray-600 dark:text-gray-400 flex-grow">
                 <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Все инструменты без ограничений</li>
                 <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Уведомления о новых декларациях</li>
                 <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span>Контакты фермеров и компаний</li>
