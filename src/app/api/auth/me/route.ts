@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifySessionToken } from "@/lib/auth";
 
-const JWT_SECRET = process.env.JWT_SECRET || "zerno-poisk-secret-change-me";
+const JWT_SECRET = process.env.JWT_SECRET;
 const COOKIE_NAME = "zp_session";
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get(COOKIE_NAME)?.value;
 
-  if (!token) {
+  if (!token || !JWT_SECRET) {
     return NextResponse.json({ user: null });
   }
 

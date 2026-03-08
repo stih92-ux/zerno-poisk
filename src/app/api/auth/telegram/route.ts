@@ -6,13 +6,42 @@ import {
   type TelegramUser,
 } from "@/lib/auth";
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
-const JWT_SECRET = process.env.JWT_SECRET || "zerno-poisk-secret-change-me";
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!BOT_TOKEN || !JWT_SECRET) {
+  console.error("CRITICAL: TELEGRAM_BOT_TOKEN or JWT_SECRET is not set!");
+}
 const COOKIE_NAME = "zp_session";
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
 export async function POST(req: NextRequest) {
   try {
+    // Проверяем наличие секретов
+    if (!BOT_TOKEN || !JWT_SECRET) {
+      return NextResponse.json(
+        { error: "Сервер не настроен для авторизации" },
+        { status: 503 }
+      );
+    }
+
+    // Проверяем Origin/Referer — запросы только с нашего домена
+    const origin = req.headers.get("origin") || "";
+    const allowedOrigins = [
+      "https://zerno-poisk.ru",
+      "https://www.zerno-poisk.ru",
+      "https://zerno-poisk.vercel.app",
+    ];
+    if (
+      process.env.NODE_ENV === "production" &&
+      !allowedOrigins.some((o) => origin.startsWith(o))
+    ) {
+      return NextResponse.json(
+        { error: "Недопустимый источник запроса" },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json();
 
     const telegramUser: TelegramUser = {
@@ -25,7 +54,8 @@ export async function POST(req: NextRequest) {
       hash: String(body.hash),
     };
 
-    // Verify hash
+    // Verify hash — ГЛАВНАЯ ЗАЩИТА от подмены
+    // Даже если виджет подменят, без bot_token нельзя подделать hash
     if (!verifyTelegramAuth(telegramUser, BOT_TOKEN)) {
       return NextResponse.json(
         { error: "Неверная подпись Telegram" },
