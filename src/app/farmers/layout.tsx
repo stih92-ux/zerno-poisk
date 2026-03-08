@@ -15,6 +15,45 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Откуда берутся данные о фермерах?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Из открытых данных ЕГРЮЛ/ЕГРИП (ФНС), Росстата и отраслевых справочников. Для каждого КФХ: название, ФИО главы, контакты, регион, посевные площади.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Как связаться с фермером напрямую?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Нажмите на карточку хозяйства — откроются контакты: телефон и email главы КФХ.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Можно ли фильтровать фермеров по культуре и площади?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Да, доступна фильтрация по зерновым культурам и минимальной площади посева в гектарах.",
+      },
+    },
+  ],
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

@@ -313,6 +313,33 @@ export default function ComtradePage() {
             <p>Данные полезны для аналитиков рынка, экспортёров и импортёров, которым нужно понять глобальные тренды. Например, вы можете увидеть, сколько пшеницы Россия экспортирует в Европу и Азию, или как меняются мировые цены на фоне экспортных объёмов.</p>
             <p>На этой странице вы выбираете интересующие культуры и страны, а затем получаете таблицу с объёмами в тоннах и стоимостью в долларах. Сочетайте эти данные с локальными ценами на странице <a href="/prices" style={{ color: '#2e7d32', textDecoration: 'underline' }}>Цены</a> для полной картины рынка.</p>
           </div>
+
+          <h3 className="text-xl font-bold mt-10 mb-4" style={{ color: '#1c1c1c' }}>Часто задаваемые вопросы</h3>
+          <div className="space-y-4">
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Что такое UN Comtrade?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>UN Comtrade — крупнейшая в мире база данных по международной торговле товарами. Она ведётся статистическим отделом ООН и содержит данные об экспорте и импорте более чем 200 стран. Товары классифицируются по кодам HS (Harmonized System) — для зерновых это группа 10 (пшеница — 1001, ячмень — 1003, кукуруза — 1005 и другие).</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>За какой период доступны данные?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>На ЗерноПоиск доступны данные за последние 4 года. Статистика обновляется по мере публикации новых отчётов странами-участницами. Обратите внимание, что некоторые страны публикуют данные с задержкой в 3–6 месяцев.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Какие страны являются крупнейшими импортёрами российского зерна?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Основные покупатели российской пшеницы — Турция, Египет, Бангладеш, Саудовская Аравия и страны Африки. По ячменю — Саудовская Аравия, Иран, Иордания. Китай активно наращивает импорт российского зерна через механизм аккредитации <a href="/gacc" style={{ color: '#2e7d32', textDecoration: 'underline' }}>GACC</a>.</p>
+            </details>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="/blog/export-china-gacc-2026" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Экспорт зерна в Китай: требования GACC 2026</p>
+            </a>
+            <a href="/gacc" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Инструмент</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Реестр GACC: аккредитация для Китая</p>
+            </a>
+          </div>
         </div>
       </section>
 

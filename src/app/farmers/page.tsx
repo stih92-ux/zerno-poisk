@@ -302,6 +302,33 @@ export default function FarmersPage() {
             <p>Поиск работает по названию хозяйства, названию контактного лица, названию региона или специализации. Вы можете фильтровать по культурам и минимальной площади посева. Например, найдите всех производителей пшеницы в Воронежской области с площадью более 100 гектаров.</p>
             <p>База полезна для трейдеров, переработчиков и логистов, которые ищут надёжных поставщиков и хотят связаться с ними напрямую. Сравните предложения от разных хозяйств и проверьте их декларации соответствия на странице <a href="/search" style={{ color: '#2e7d32', textDecoration: 'underline' }}>Декларации</a> перед покупкой.</p>
           </div>
+
+          <h3 className="text-xl font-bold mt-10 mb-4" style={{ color: '#1c1c1c' }}>Часто задаваемые вопросы</h3>
+          <div className="space-y-4">
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Откуда берутся данные о фермерах?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>База составлена на основе открытых данных ЕГРЮЛ/ЕГРИП (ФНС), Росстата и отраслевых справочников. Для каждого КФХ собраны: юридическое название, ФИО главы, контакты (телефон, email), регион, специализация и посевные площади по основным культурам.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Как связаться с фермером напрямую?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Нажмите на карточку хозяйства — откроются контактные данные: телефон и email главы КФХ. Вы можете позвонить или написать напрямую. Перед обращением рекомендуем проверить декларации поставщика через <a href="/search" style={{ color: '#2e7d32', textDecoration: 'underline' }}>поиск деклараций</a> и сравнить <a href="/prices" style={{ color: '#2e7d32', textDecoration: 'underline' }}>актуальные цены</a> на рынке.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Можно ли фильтровать фермеров по культуре и площади?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Да, доступна фильтрация по зерновым культурам (пшеница озимая и яровая, ячмень, кукуруза, подсолнечник, соя) и минимальной площади посева в гектарах. Также можно искать по названию хозяйства, ФИО главы или региону.</p>
+            </details>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="/blog/farm-database-kfh" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>База КФХ: как найти фермера для закупки</p>
+            </a>
+            <a href="/blog/find-grain-buyer" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Как найти покупателя зерна: руководство</p>
+            </a>
+          </div>
         </div>
       </section>
 

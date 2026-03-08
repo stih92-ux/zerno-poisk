@@ -15,6 +15,53 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Что такое декларация соответствия на зерно?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Декларация соответствия — это документ, подтверждающий, что партия зерна соответствует требованиям технического регламента ТР ТС 015/2011. Она содержит данные о заявителе, изготовителе, объёме партии, результатах испытаний и сроке действия.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Как часто обновляется база деклараций?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "База синхронизируется с реестром Росаккредитации ежедневно. Новые декларации появляются в течение 24 часов после регистрации в ФГИС.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Можно ли скачать результаты поиска?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Да, после поиска доступна выгрузка в формате CSV — в виде списка деклараций или с группировкой по компаниям.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Какие культуры доступны для поиска?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "В системе доступны 13 зерновых культур: пшеница, ячмень, кукуруза, рожь, овёс, рис, просо, гречиха, тритикале, сорго, соя, подсолнечник и рапс.",
+      },
+    },
+  ],
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

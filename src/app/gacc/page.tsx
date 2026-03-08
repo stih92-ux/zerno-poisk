@@ -355,6 +355,33 @@ export default function GACCPage() {
             <p>Регистрация в GACC требуется для соответствия требованиям китайского законодательства по безопасности пищевых продуктов. Компания должна пройти инспекцию, получить номер аккредитации, и периодически подтверждать статус. Реестр публикуется GACC, и мы даём вам возможность быстро проверить статус компании.</p>
             <p>Если вы планируете экспорт в Китай, убедитесь, что ваша компания зарегистрирована. Найдите проверенных поставщиков через поиск по названию или загрузите список всех аккредитованных российских компаний. Сравните их декларации на странице <a href="/search" style={{ color: '#2e7d32', textDecoration: 'underline' }}>Декларации</a>.</p>
           </div>
+
+          <h3 className="text-xl font-bold mt-10 mb-4" style={{ color: '#1c1c1c' }}>Часто задаваемые вопросы</h3>
+          <div className="space-y-4">
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Как зарегистрироваться в реестре GACC?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Регистрация проходит через Россельхознадзор: компания подаёт заявку, проходит инспекцию предприятия на соответствие требованиям КНР, после чего Россельхознадзор направляет документы в GACC. Процесс занимает от 3 до 12 месяцев. Предприятие получает уникальный регистрационный номер.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Какие виды зерна разрешены к экспорту в Китай?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>По межправительственному протоколу между РФ и КНР разрешены: пшеница, ячмень, кукуруза, рис, соя, рапс, подсолнечник, овёс, гречиха и просо. Для каждой культуры действуют отдельные фитосанитарные требования, включая допустимые уровни загрязнения и требования к фумигации.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Что нужно для фитосанитарного сертификата?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Фитосанитарный сертификат выдаётся Россельхознадзором перед отгрузкой. Необходимо пройти карантинный контроль партии, подтвердить отсутствие карантинных объектов и предоставить результаты лабораторных исследований. Для экспорта в Китай также требуется фумигация по стандартам IPPC.</p>
+            </details>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="/blog/export-china-gacc-2026" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Экспорт зерна в Китай: требования GACC 2026</p>
+            </a>
+            <a href="/comtrade" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Инструмент</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Объёмы экспорта: статистика Comtrade</p>
+            </a>
+          </div>
         </div>
       </section>
 

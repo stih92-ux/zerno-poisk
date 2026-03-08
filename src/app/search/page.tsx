@@ -448,6 +448,37 @@ export default function SearchPage() {
             <p>Поиск занимает всего 10 секунд. Выберите интересующие вас культуры (пшеница, ячмень, кукуруза и др.), укажите регион или компанию — и получите полный список деклараций с контактными данными производителя, объёмами и датами действия. Каждая декларация ссылается на оригинальный документ в ФГИС.</p>
             <p>Поиск деклараций полезен для торговцев, переработчиков и логистических компаний, которым нужно быстро проверить статус поставщика. Сравните цены найденных компаний на странице <a href="/prices" style={{ color: '#2e7d32', textDecoration: 'underline' }}>Цены</a> или найдите фермеров напрямую в <a href="/farmers" style={{ color: '#2e7d32', textDecoration: 'underline' }}>базе фермеров</a>.</p>
           </div>
+
+          <h3 className="text-xl font-bold mt-10 mb-4" style={{ color: '#1c1c1c' }}>Часто задаваемые вопросы</h3>
+          <div className="space-y-4">
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Что такое декларация соответствия на зерно?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Декларация соответствия — это документ, подтверждающий, что партия зерна соответствует требованиям технического регламента ТР ТС 015/2011 «О безопасности зерна». Она содержит данные о заявителе, изготовителе, объёме партии, результатах испытаний (клейковина, ИДК, влажность, натура) и сроке действия. Декларация регистрируется в ФГИС Росаккредитации.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Как часто обновляется база деклараций?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>База синхронизируется с реестром Росаккредитации ежедневно. Новые декларации появляются в системе в течение 24 часов после регистрации в ФГИС. На данный момент база содержит более 500 000 документов за период 2020–2026 годов.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Можно ли скачать результаты поиска?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Да, после выполнения поиска доступна выгрузка в формате CSV. Вы можете скачать результаты в виде списка деклараций или сгруппировать их по компаниям — это удобно для анализа поставщиков и сравнения объёмов.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Какие культуры доступны для поиска?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>В системе доступны 13 зерновых культур: пшеница, ячмень, кукуруза, рожь, овёс, рис, просо, гречиха, тритикале, сорго, а также соя, подсолнечник и рапс. Фильтрация по культуре позволяет быстро найти нужные декларации среди полумиллиона документов.</p>
+            </details>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="/blog/grain-declarations" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Зерновые декларации: что это и как получить</p>
+            </a>
+            <a href="/blog/find-grain-buyer" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Как найти покупателя зерна: руководство</p>
+            </a>
+          </div>
         </div>
       </section>
 

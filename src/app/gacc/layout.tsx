@@ -15,6 +15,45 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Как зарегистрироваться в реестре GACC?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Через Россельхознадзор: подача заявки, инспекция предприятия, направление документов в GACC. Процесс занимает от 3 до 12 месяцев.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Какие виды зерна разрешены к экспорту в Китай?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Пшеница, ячмень, кукуруза, рис, соя, рапс, подсолнечник, овёс, гречиха и просо — по межправительственному протоколу между РФ и КНР.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Что нужно для фитосанитарного сертификата?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Карантинный контроль партии, лабораторные исследования, подтверждение отсутствия карантинных объектов и фумигация по стандартам IPPC.",
+      },
+    },
+  ],
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

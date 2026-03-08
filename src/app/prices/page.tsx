@@ -152,6 +152,33 @@ export default function PricesPage() {
             <p>На MOEX торгуются фьючерсы на пшеницу, ячмень и кукурузу — это показатель справедливой стоимости. ZOL.RU показывает региональные цены с указанием тренда. IDK.RU содержит реальные объявления от продавцов и покупателей по всей России.</p>
             <p>Отслеживайте динамику цен для принятия торговых решений. Сравните цены с качеством продукции, проверив декларации соответствия на странице <a href="/search" style={{ color: '#2e7d32', textDecoration: 'underline' }}>Декларации</a>, или найдите производителя с нужными объёмами в <a href="/farmers" style={{ color: '#2e7d32', textDecoration: 'underline' }}>базе фермеров</a>.</p>
           </div>
+
+          <h3 className="text-xl font-bold mt-10 mb-4" style={{ color: '#1c1c1c' }}>Часто задаваемые вопросы</h3>
+          <div className="space-y-4">
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Какие источники цен используются?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Мы агрегируем данные из трёх основных источников: MOEX (Московская биржа) — фьючерсные контракты на пшеницу, ячмень и кукурузу; ZOL.RU — региональные цены закупки на элеваторах и портах с указанием базиса поставки (EXW, CPT, FOB); IDK.RU — актуальные объявления о покупке и продаже зерна от реальных участников рынка.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Как часто обновляются котировки?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>Биржевые данные MOEX обновляются в режиме торговых сессий (по рабочим дням). Региональные цены ZOL.RU и объявления IDK.RU обновляются ежедневно. Тренды (рост или падение цены) рассчитываются автоматически на основе сравнения с предыдущим торговым днём.</p>
+            </details>
+            <details className="group">
+              <summary className="cursor-pointer text-base font-medium" style={{ color: '#1c1c1c' }}>Что такое базис поставки EXW и FOB?</summary>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: '#555' }}>EXW (Ex Works) — цена на воротах элеватора или склада, без транспортировки. FOB (Free On Board) — цена включает доставку до порта и погрузку на судно. CPT (Carriage Paid To) — цена с доставкой до указанного пункта. Базис поставки существенно влияет на итоговую цену зерна, поэтому важно сравнивать цены с одинаковым базисом.</p>
+            </details>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="/blog/wheat-prices-2026" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Статья в блоге</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Цены на пшеницу 2026: обзор и прогноз рынка</p>
+            </a>
+            <a href="/comtrade" className="block rounded-lg p-4" style={{ backgroundColor: '#e8ede3' }}>
+              <span className="text-sm font-medium" style={{ color: '#2e7d32' }}>Инструмент</span>
+              <p className="mt-1 text-sm font-semibold" style={{ color: '#1c1c1c' }}>Экспортные цены: данные UN Comtrade</p>
+            </a>
+          </div>
         </div>
       </section>
 
