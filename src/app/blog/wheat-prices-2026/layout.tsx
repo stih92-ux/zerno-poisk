@@ -24,20 +24,20 @@ const jsonLd = {
   dateModified: "2026-03-04",
   description:
     "Анализ цен на пшеницу в России 2026: текущие котировки MOEX, факторы влияния, региональные различия и прогноз развития рынка зерна.",
-  url: "https://zerno-poisk.vercel.app/blog/wheat-prices-2026",
+  url: "https://zerno-poisk.ru/blog/wheat-prices-2026",
   author: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   publisher: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://zerno-poisk.vercel.app/blog/wheat-prices-2026",
+    "@id": "https://zerno-poisk.ru/blog/wheat-prices-2026",
   },
   inLanguage: "ru",
 };

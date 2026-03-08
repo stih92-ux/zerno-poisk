@@ -24,20 +24,20 @@ const jsonLd = {
   dateModified: "2026-03-02",
   description:
     "Полное руководство по экспорту зерна в Китай: требования GACC, процесс аккредитации, фитосанитарный контроль, логистика и экономика сделки.",
-  url: "https://zerno-poisk.vercel.app/blog/export-china-gacc-2026",
+  url: "https://zerno-poisk.ru/blog/export-china-gacc-2026",
   author: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   publisher: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://zerno-poisk.vercel.app/blog/export-china-gacc-2026",
+    "@id": "https://zerno-poisk.ru/blog/export-china-gacc-2026",
   },
   inLanguage: "ru",
 };

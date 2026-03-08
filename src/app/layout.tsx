@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://zerno-poisk.vercel.app";
+const siteUrl = "https://zerno-poisk.ru";
 
 export const metadata: Metadata = {
   title: {

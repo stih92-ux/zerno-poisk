@@ -24,20 +24,20 @@ const jsonLd = {
   dateModified: "2026-03-01",
   description:
     "Как использовать базу 27 000+ крестьянских фермерских хозяйств России для поиска поставщиков зерна. Алгоритм поиска и фильтрации по региону и культуре.",
-  url: "https://zerno-poisk.vercel.app/blog/farm-database-kfh",
+  url: "https://zerno-poisk.ru/blog/farm-database-kfh",
   author: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   publisher: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://zerno-poisk.vercel.app/blog/farm-database-kfh",
+    "@id": "https://zerno-poisk.ru/blog/farm-database-kfh",
   },
   inLanguage: "ru",
 };

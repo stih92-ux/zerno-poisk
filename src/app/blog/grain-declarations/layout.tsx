@@ -24,20 +24,20 @@ const jsonLd = {
   dateModified: "2026-03-05",
   description:
     "Полное руководство по декларациям соответствия на зерно: определение, процесс получения, требования ТР ТС, штрафы и как проверить через ФГИС Росаккредитации.",
-  url: "https://zerno-poisk.vercel.app/blog/grain-declarations",
+  url: "https://zerno-poisk.ru/blog/grain-declarations",
   author: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   publisher: {
     "@type": "Organization",
     name: "ЗерноПоиск",
-    url: "https://zerno-poisk.vercel.app",
+    url: "https://zerno-poisk.ru",
   },
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://zerno-poisk.vercel.app/blog/grain-declarations",
+    "@id": "https://zerno-poisk.ru/blog/grain-declarations",
   },
   inLanguage: "ru",
 };

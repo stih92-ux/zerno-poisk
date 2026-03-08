@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://zerno-poisk.vercel.app/sitemap.xml
+Sitemap: https://zerno-poisk.ru/sitemap.xml
