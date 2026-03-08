@@ -3,208 +3,231 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 
+const features = [
+  {
+    title: "Поиск деклараций",
+    desc: "500 000+ деклараций из ФГИС. 13 культур, 68 регионов, фильтрация по объёму.",
+    href: "/search",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Цены на зерно",
+    desc: "Котировки MOEX, региональные цены ZOL.RU, объявления IDK.RU в реальном времени.",
+    href: "/prices",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13h2v8H3zM9 8h2v13H9zM15 11h2v10h-2zM21 4h2v17h-2z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Comtrade",
+    desc: "Международная торговля зерном. Данные UN Comtrade по 170+ странам.",
+    href: "/comtrade",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "GACC Китай",
+    desc: "Проверка аккредитации компаний для экспорта зерна в Китай.",
+    href: "/gacc",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+  },
+  {
+    title: "База фермеров",
+    desc: "27 000+ КФХ и сельхозкомпаний с контактами, площадями и регионами.",
+    href: "/farmers",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Экспорт данных",
+    desc: "Выгрузка в CSV с группировкой по компаниям для дальнейшего анализа.",
+    href: "/search",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+  },
+];
+
+const stats = [
+  { value: "500K+", label: "деклараций" },
+  { value: "27K+", label: "фермеров" },
+  { value: "170+", label: "стран" },
+  { value: "24/7", label: "доступ" },
+];
+
 export default function HomePage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-[#0a1a0a]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#1a2e1a] backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🌾</span>
-            <span className="text-xl font-bold text-white">ЗерноПоиск</span>
-          </div>
-          <nav className="flex items-center gap-8">
-            <Link href="/search" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Декларации</Link>
-            <Link href="/prices" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Цены</Link>
-            <Link href="/comtrade" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Comtrade</Link>
-            <Link href="/gacc" className="text-sm font-medium text-white/70 hover:text-white transition-colors">GACC</Link>
-            <Link href="/farmers" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Фермеры</Link>
-            <Link href="/blog" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Блог</Link>
-            <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-white/70 hover:text-white transition-colors">Telegram</a>
-            <ThemeToggle />
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0a1a0a]/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+        <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-lg">🌾</span>
+            <span className="text-base font-semibold text-gray-900 dark:text-white">ЗерноПоиск</span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/search" className="text-[13px] text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Декларации</Link>
+            <Link href="/prices" className="text-[13px] text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Цены</Link>
+            <Link href="/comtrade" className="text-[13px] text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Comtrade</Link>
+            <Link href="/gacc" className="text-[13px] text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">GACC</Link>
+            <Link href="/farmers" className="text-[13px] text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Фермеры</Link>
+            <Link href="/blog" className="text-[13px] text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">Блог</Link>
           </nav>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <a
+              href="https://t.me/agro_analizbot"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-gray-900 dark:bg-white px-4 py-1.5 text-[13px] font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
+            >
+              Telegram-бот
+            </a>
+          </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="bg-[#f8f9f6] py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center">
-            <h1 className="text-5xl sm:text-6xl font-bold text-[#1c1c1c] leading-tight">
-              ЗерноПоиск: декларации, цены и база фермеров России в одном сервисе
-            </h1>
-            <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
-              Зерновой рынок России генерирует десятки миллионов тонн продукции ежегодно. Находите поставщиков, проверяйте декларации и отслеживайте цены.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/search"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#2d7a2d] px-8 py-3 text-base font-semibold text-white hover:bg-[#245c24] transition-colors"
-              >
-                Начать поиск
-              </Link>
-              <a
-                href="https://t.me/agro_analizbot"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-[#2d7a2d] px-8 py-3 text-base font-semibold text-[#2d7a2d] bg-transparent hover:bg-[#f0f8f0] transition-colors"
-              >
-                Открыть бот
-              </a>
-            </div>
+      {/* Hero */}
+      <section className="pt-20 pb-16 sm:pt-28 sm:pb-20">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400">Данные обновляются ежедневно</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-gray-900 dark:text-white leading-tight tracking-tight">
+            Аналитика зернового рынка России
+          </h1>
+          <p className="mt-4 text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Декларации, цены, экспорт и база фермеров — всё в одном сервисе. Бесплатно.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3 justify-center">
+            <Link
+              href="/search"
+              className="rounded-full bg-gray-900 dark:bg-white px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
+            >
+              Начать поиск →
+            </Link>
+            <Link
+              href="/prices"
+              className="rounded-full bg-gray-100 dark:bg-gray-800 px-6 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              Смотреть цены
+            </Link>
+          </div>
+        </div>
 
-            {/* Counter Tiles */}
-            <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <div className="text-4xl font-bold text-[#2d7a2d]">500 000+</div>
-                <div className="text-gray-600 mt-2">деклараций</div>
+        {/* Stats */}
+        <div className="mx-auto max-w-2xl px-4 mt-16">
+          <div className="grid grid-cols-4 gap-4">
+            {stats.map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{s.value}</div>
+                <div className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{s.label}</div>
               </div>
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <div className="text-4xl font-bold text-[#2d7a2d]">27 000+</div>
-                <div className="text-gray-600 mt-2">фермеров</div>
-              </div>
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <div className="text-4xl font-bold text-[#2d7a2d]">3</div>
-                <div className="text-gray-600 mt-2">источника котировок</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4">
-          <h2 className="text-center text-3xl font-bold text-[#1c1c1c] mb-16">Возможности платформы</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "🔍",
-                title: "Поиск деклараций",
-                desc: "13 культур, 68 регионов, 5 сегментов. Фильтрация по объёму и датам.",
-                href: "/search"
-              },
-              {
-                icon: "📊",
-                title: "Цены на зерно",
-                desc: "Биржевые цены MOEX, региональные цены ZOL.RU, объявления IDK.RU.",
-                href: "/prices"
-              },
-              {
-                icon: "🌏",
-                title: "Comtrade",
-                desc: "Международная торговля зерном. Данные UN Comtrade по импорту/экспорту.",
-                href: "/comtrade"
-              },
-              {
-                icon: "🇨🇳",
-                title: "GACC Китай",
-                desc: "Проверка аккредитации компаний для экспорта зерна в Китай.",
-                href: "/gacc"
-              },
-              {
-                icon: "🌾",
-                title: "База фермеров",
-                desc: "27 000+ КФХ и сельхозкомпаний с контактами и площадями.",
-                href: "/farmers"
-              },
-              {
-                icon: "📥",
-                title: "Экспорт CSV",
-                desc: "Выгрузка результатов поиска с группировкой по компаниям.",
-                href: "/search"
-              },
-            ].map((feature, i) => (
+      {/* Divider */}
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="border-t border-gray-100 dark:border-gray-800" />
+      </div>
+
+      {/* Features */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Инструменты</h2>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">Всё, что нужно для работы с зерновым рынком</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((f) => (
               <Link
-                key={i}
-                href={feature.href}
-                className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+                key={f.title}
+                href={f.href}
+                className="group rounded-xl border border-gray-100 dark:border-gray-800 p-5 hover:border-gray-200 dark:hover:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-all"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-lg font-semibold text-[#1c1c1c]">{feature.title}</h3>
-                <p className="text-gray-600 text-sm mt-3 leading-relaxed">{feature.desc}</p>
-                <div className="mt-4 text-[#2d7a2d] font-medium text-sm">Подробнее →</div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400">
+                    {f.icon}
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{f.title}</h3>
+                </div>
+                <p className="text-[13px] text-gray-500 dark:text-gray-400 leading-relaxed">{f.desc}</p>
+                <div className="mt-3 text-xs font-medium text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                  Открыть →
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Trust Block */}
-      <section className="bg-[#1a2e1a] py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-white">500 000+</div>
-              <div className="text-white/70 text-sm mt-2">деклараций</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-white">27 000+</div>
-              <div className="text-white/70 text-sm mt-2">КФХ</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-white">170+</div>
-              <div className="text-white/70 text-sm mt-2">стран Comtrade</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-white">Ежедневно</div>
-              <div className="text-white/70 text-sm mt-2">обновление</div>
+      {/* CTA */}
+      <section className="pb-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="rounded-2xl bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 p-8 sm:p-12 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Начните бесплатно</h2>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+              Полный доступ ко всем инструментам. Без регистрации, без оплаты.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 justify-center">
+              <Link
+                href="/search"
+                className="rounded-full bg-gray-900 dark:bg-white px-6 py-2.5 text-sm font-medium text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors"
+              >
+                Искать декларации
+              </Link>
+              <a
+                href="https://t.me/agro_analizbot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-6 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                Открыть бот в Telegram
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Block */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#1c1c1c]">Начните работу бесплатно</h2>
-          <p className="text-gray-600 text-lg mt-4 mb-8">Доступ ко всем инструментам без оплаты</p>
-          <Link
-            href="/search"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#2d7a2d] px-8 py-3 text-base font-semibold text-white hover:bg-[#245c24] transition-colors"
-          >
-            Начать →
-          </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#1a2e1a] text-white py-12">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-semibold mb-4">Платформа</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li><Link href="/search" className="hover:text-white transition-colors">Декларации</Link></li>
-                <li><Link href="/prices" className="hover:text-white transition-colors">Цены</Link></li>
-                <li><Link href="/comtrade" className="hover:text-white transition-colors">Comtrade</Link></li>
-              </ul>
+      <footer className="border-t border-gray-100 dark:border-gray-800 py-10">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">🌾</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white">ЗерноПоиск</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">© 2026</span>
             </div>
-            <div>
-              <h3 className="font-semibold mb-4">Сервисы</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li><Link href="/gacc" className="hover:text-white transition-colors">GACC</Link></li>
-                <li><Link href="/farmers" className="hover:text-white transition-colors">Фермеры</Link></li>
-                <li><Link href="/blog" className="hover:text-white transition-colors">Блог</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Контакты</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li>
-                  <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                    Telegram: @agro_analizbot
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">О сервисе</h3>
-              <p className="text-sm text-white/70">Поиск деклараций, цены и база фермеров России</p>
-            </div>
-          </div>
-          <div className="border-t border-white/10 pt-8 text-center text-sm text-white/70">
-            <p>© 2026 ЗерноПоиск</p>
+            <nav className="flex flex-wrap items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
+              <Link href="/search" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Декларации</Link>
+              <Link href="/prices" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Цены</Link>
+              <Link href="/comtrade" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Comtrade</Link>
+              <Link href="/gacc" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">GACC</Link>
+              <Link href="/farmers" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Фермеры</Link>
+              <Link href="/blog" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Блог</Link>
+              <a href="https://t.me/agro_analizbot" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Telegram</a>
+            </nav>
           </div>
         </div>
       </footer>
